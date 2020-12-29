@@ -1,0 +1,33 @@
+.MainTab {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.MainTab li {
+  flex: 1;
+  padding: 7px 0;
+  line-height: 100%;
+  background-color: #ff8000;
+  text-align: center;
+  color: #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.unClicked:last-of-type {
+  border-right: none;
+}
+
+.MainTab .Clicked {
+  flex: 1;
+  padding: 7px 0;
+  line-height: 100%;
+  background-color: #ff9d3c;
+  text-align: center;
+  color: #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.MainTab .MouseOn {
+  background-color: #ff9d3c;
+}
