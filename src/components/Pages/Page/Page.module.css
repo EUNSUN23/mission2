@@ -1,0 +1,11 @@
+.MainContent {
+  width: 80%;
+  text-align: center;
+  background-color: cornsilk;
+}
+
+.MainContent .SubContent {
+  margin: 0 20px;
+  text-align: center;
+  background-color: burlywood;
+}
