@@ -1,20 +1,16 @@
-import React, { Component } from "react";
+import React, { memo } from "react";
 import MainTab from "../../components/UI/MainTab/MainTab";
 import Header from "../../components/Header/Header";
 
-class Layout extends Component {
-  state = {};
+const Layout = memo((props) => {
+  return (
+    <>
+      <Header currentMainPath={props.currentMainPath} />
+      <MainTab currentMainPath={props.currentMainPath} />
 
-  render() {
-    return (
-      <>
-        <Header />
-        <MainTab />
-
-        {this.props.children}
-      </>
-    );
-  }
-}
+      {props.children}
+    </>
+  );
+});
 
 export default Layout;

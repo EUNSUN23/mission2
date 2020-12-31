@@ -1,10 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./Header.module.css";
 import { useDispatch } from "react-redux";
 import { setPage } from "../../store/actions/pagination";
 import { push } from "connected-react-router";
 
-const Header = (props) => {
+const Header = memo((props) => {
   const dispatch = useDispatch();
 
   const onClickHeader = () => {
@@ -23,6 +23,6 @@ const Header = (props) => {
       </header>
     </>
   );
-};
+});
 
 export default Header;

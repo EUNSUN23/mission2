@@ -1,19 +1,30 @@
-import React from "react";
-
+import React, { useState, memo, useRef, useEffect } from "react";
+import debounce from "lodash/debounce";
 import styles from "./MainTab.module.css";
 import { setPage } from "../../../store/actions/pagination";
 import { push } from "react-router-redux";
 import { useDispatch } from "react-redux";
 import { history } from "../../../index";
 
-const MainTab = () => {
-  const currentPath = history.location.pathname;
+const MainTab = (props) => {
   const dispatch = useDispatch();
+  let currentMainPath = useRef(props.currentMainPath);
+  console.log(currentMainPath);
+  const [isMainClicked, setIsMainClicked] = useState(false);
 
   const onNavLink = (page) => {
     dispatch(setPage(page));
-    dispatch(push(page));
+    setIsMainClicked(true);
   };
+
+  useEffect(() => {
+    const routePage = debounce((path) => {
+      console.log(path);
+      dispatch(push(path));
+    }, 500);
+
+    isMainClicked && routePage(props.currentMainPath);
+  });
 
   return (
     <>

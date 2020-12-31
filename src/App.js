@@ -7,29 +7,35 @@ import { history } from "./index";
 import Page from "./components/Pages/Page/Page";
 
 const App = () => {
-  const currentPath = history.location.pathname;
+  const currentMainPath = useSelector((state) => {
+    return state.reducer.url;
+  });
   const contents = useSelector((state) => {
     return state.reducer.contents;
   });
 
   const route =
-    currentPath !== "/" ? (
+    currentMainPath !== "/" ? (
       <Route
-        path={currentPath}
-        render={() => <Page currentPath={currentPath} contents={contents} />}
+        path={currentMainPath}
+        render={() => (
+          <Page currentMainPath={currentMainPath} contents={contents} />
+        )}
       />
     ) : (
       <Route
         exact
         path="/"
-        render={() => <Welcome currentPath={currentPath} contents={contents} />}
+        render={() => (
+          <Welcome currentMainPath={currentMainPath} contents={contents} />
+        )}
       />
     );
 
   return (
     <>
       <div>
-        <Layout>{route}</Layout>
+        <Layout currentMainPath={currentMainPath}>{route}</Layout>
       </div>
     </>
   );

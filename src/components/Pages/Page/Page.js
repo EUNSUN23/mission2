@@ -1,28 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo, useRef } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { push } from "react-router-redux";
 import SubTab from "../../UI/SubTab/SubTab";
 import SubPage from "../SubPage/SubPage";
 import styles from "./Page.module.css";
+import debounce from "lodash/debounce";
 
 const Page = (props) => {
   const [isSubClicked, setIsSubClicked] = useState(false);
+  const [subClickCount, setSubClickCount] = useState(0);
   const [subPage, setSubPage] = useState(null);
   const dispatch = useDispatch();
 
-  const onSubTabHandler = (endPoint) => {
+  const routePage = debounce((path) => {
+    dispatch(push(path));
+  }, 500);
+
+  const onSubTabHandler = (whichSub) => {
     setIsSubClicked(true);
-    setSubPage(endPoint);
+    setSubPage(whichSub);
+    setSubClickCount(subClickCount + 1);
+    console.log(isSubClicked);
   };
 
   useEffect(() => {
-    isSubClicked && dispatch(push(`${props.currentPath}/${subPage}`));
+    console.log(subClickCount);
+    let mainPath = props.currentMainPath.slice(1);
+    let endPoint = `${mainPath}/${subPage}`;
+    if (subClickCount > 1) {
+      endPoint = `${subPage}`;
+    }
+
+    console.log(endPoint);
+    isSubClicked && routePage(endPoint);
   }, [subPage]);
 
   const subPageRoute = isSubClicked && (
     <Route
-      path={`${props.currentPath}/${subPage}`}
+      path={`${props.currentMainPath}/${subPage}`}
       render={() => <SubPage contents={props.contents.subPage[subPage]} />}
     />
   );
