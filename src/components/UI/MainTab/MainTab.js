@@ -1,21 +1,21 @@
-import React, { useState, memo, useRef, useEffect } from "react";
+import React, { useState, memo, useRef, useEffect, useCallback } from "react";
 import debounce from "lodash/debounce";
 import styles from "./MainTab.module.css";
 import { setPage } from "../../../store/actions/pagination";
 import { push } from "react-router-redux";
 import { useDispatch } from "react-redux";
-import { history } from "../../../index";
+import Tab from "../Tabs/Tab";
 
-const MainTab = (props) => {
+const MainTab = memo((props) => {
   const dispatch = useDispatch();
   let currentMainPath = useRef(props.currentMainPath);
   console.log(currentMainPath);
   const [isMainClicked, setIsMainClicked] = useState(false);
 
-  const onNavLink = (page) => {
+  const onNavLink = useCallback((page) => {
     dispatch(setPage(page));
     setIsMainClicked(true);
-  };
+  });
 
   useEffect(() => {
     const routePage = debounce((path) => {
@@ -30,46 +30,17 @@ const MainTab = (props) => {
     <>
       <div>
         <ul className={styles.MainTab}>
-          <li>
-            <span
-              onClick={() => {
-                onNavLink("page1");
-              }}
-            >
-              page1
-            </span>
-          </li>
-          <li>
-            <span
-              onClick={() => {
-                onNavLink("page2");
-              }}
-            >
-              page2
-            </span>
-          </li>
-          <li>
-            <span
-              onClick={() => {
-                onNavLink("page3");
-              }}
-            >
-              page3
-            </span>
-          </li>
-          <li>
-            <span
-              onClick={() => {
-                onNavLink("page4");
-              }}
-            >
-              page4
-            </span>
-          </li>
+          <Tab routeTrigger={onNavLink}>page1</Tab>
+
+          <Tab routeTrigger={onNavLink}>page2</Tab>
+
+          <Tab routeTrigger={onNavLink}>page3</Tab>
+
+          <Tab routeTrigger={onNavLink}>page4</Tab>
         </ul>
       </div>
     </>
   );
-};
+});
 
 export default MainTab;

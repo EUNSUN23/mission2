@@ -1,0 +1,18 @@
+.UnClicked {
+  background-color: #ff8000;
+  text-align: center;
+  color: #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.Clicked {
+  background-color: #ff9d3c;
+  text-align: center;
+  color: #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.UnClicked:last-of-type,
+.Clicked:last-of-type {
+  border-right: none;
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styles from "./SubTab.module.css";
 
 const SubTab = (props) => {

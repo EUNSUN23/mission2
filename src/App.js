@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import Layout from "./container/Layout/Layout";
 import Welcome from "./components/Welcome";
-import { history } from "./index";
 import Page from "./components/Pages/Page/Page";
 
 const App = () => {
