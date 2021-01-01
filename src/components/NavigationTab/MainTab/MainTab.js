@@ -9,11 +9,12 @@ import Tab from "../Tabs/Tab";
 const MainTab = memo((props) => {
   const dispatch = useDispatch();
   let currentMainPath = useRef(props.currentMainPath);
-  console.log(currentMainPath);
   const [isMainClicked, setIsMainClicked] = useState(false);
+  const [clickedTab, setClickedTab] = useState("");
 
   const onNavLink = useCallback((page) => {
     dispatch(setPage(page));
+    setClickedTab(page);
     setIsMainClicked(true);
   });
 
@@ -30,13 +31,21 @@ const MainTab = memo((props) => {
     <>
       <div>
         <ul className={styles.MainTab}>
-          <Tab routeTrigger={onNavLink}>page1</Tab>
+          <Tab routeTrigger={onNavLink} clickedTab={clickedTab}>
+            page1
+          </Tab>
 
-          <Tab routeTrigger={onNavLink}>page2</Tab>
+          <Tab routeTrigger={onNavLink} clickedTab={clickedTab}>
+            page2
+          </Tab>
 
-          <Tab routeTrigger={onNavLink}>page3</Tab>
+          <Tab routeTrigger={onNavLink} clickedTab={clickedTab}>
+            page3
+          </Tab>
 
-          <Tab routeTrigger={onNavLink}>page4</Tab>
+          <Tab routeTrigger={onNavLink} clickedTab={clickedTab}>
+            page4
+          </Tab>
         </ul>
       </div>
     </>

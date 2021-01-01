@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import MainTab from "../../components/UI/MainTab/MainTab";
+import MainTab from "../../components/NavigationTab/MainTab/MainTab";
 import Header from "../../components/Header/Header";
 
 const Layout = memo((props) => {

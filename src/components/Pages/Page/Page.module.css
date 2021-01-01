@@ -9,3 +9,17 @@
   text-align: center;
   background-color: burlywood;
 }
+.SubTab {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 3px 0;
+}
+
+.SubTab li {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #ffffff;
+  color: #ffffff;
+  list-style: none;
+}

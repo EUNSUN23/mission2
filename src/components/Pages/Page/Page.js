@@ -1,8 +1,8 @@
-import React, { useEffect, useState, memo, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { push } from "react-router-redux";
-import SubTab from "../../UI/SubTab/SubTab";
+import Tab from "../../NavigationTab/Tabs/Tab";
 import SubPage from "../SubPage/SubPage";
 import styles from "./Page.module.css";
 import debounce from "lodash/debounce";
@@ -44,7 +44,17 @@ const Page = (props) => {
   );
   return (
     <>
-      <SubTab show={true} onClickHandler={onSubTabHandler}></SubTab>
+      <section className={styles.SubTab}>
+        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
+          sub1
+        </Tab>
+        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
+          sub2
+        </Tab>
+        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
+          sub3
+        </Tab>
+      </section>
       <section>
         <article className={styles.MainContent}>
           <h2>{props.contents.page}</h2>
