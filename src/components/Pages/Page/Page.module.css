@@ -1,3 +1,10 @@
+.Container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
 .MainContent {
   width: 80%;
   text-align: center;
@@ -6,6 +13,7 @@
 
 .MainContent .SubContent {
   margin: 0 20px;
+  width: 80%;
   text-align: center;
   background-color: burlywood;
 }

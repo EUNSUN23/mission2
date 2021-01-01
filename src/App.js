@@ -1,11 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Welcome from "./components/Pages/Welcome";
 import Page from "./components/Pages/Page/Page";
+import { replace } from "react-router-redux";
 
 const App = () => {
+  console.log("APP_RENDER");
+  const dispatch = useDispatch();
   const currentMainPath = useSelector((state) => {
     return state.reducer.url;
   });
@@ -13,7 +16,14 @@ const App = () => {
     return state.reducer.contents;
   });
 
-  const route =
+  let route = null;
+
+  useEffect(() => {
+    console.log("redirect");
+    dispatch(replace("/"));
+  }, []);
+
+  route =
     currentMainPath !== "/" ? (
       <Route
         path={currentMainPath}

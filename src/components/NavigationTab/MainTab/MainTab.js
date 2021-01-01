@@ -1,4 +1,4 @@
-import React, { useState, memo, useRef, useEffect, useCallback } from "react";
+import React, { useState, memo, useEffect, useCallback } from "react";
 import debounce from "lodash/debounce";
 import styles from "./MainTab.module.css";
 import { setPage } from "../../../store/actions/pagination";
@@ -8,7 +8,6 @@ import Tab from "../Tabs/Tab";
 
 const MainTab = memo((props) => {
   const dispatch = useDispatch();
-  let currentMainPath = useRef(props.currentMainPath);
   const [isMainClicked, setIsMainClicked] = useState(false);
   const [clickedTab, setClickedTab] = useState("");
 
