@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import MainTab from "../../components/NavigationTab/MainTab/MainTab";
-import Header from "../../components/Header/Header";
+import MainTab from "../NavigationTab/MainTab/MainTab";
+import Header from "../Header/Header";
 
 const Layout = memo((props) => {
   return (
