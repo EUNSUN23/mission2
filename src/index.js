@@ -8,7 +8,7 @@ import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 import { routerMiddleware, connectRouter } from "connected-react-router";
 import thunk from "redux-thunk";
 import reportWebVitals from "./reportWebVitals";
-import contents from "./store/reducer/contents";
+import pagination from "./store/reducer/pagination";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +19,7 @@ export const history = createBrowserHistory();
 const store = createStore(
   combineReducers({
     router: connectRouter(history),
-    reducer: contents,
+    reducer: pagination,
   }), // root reducer with router state
   composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
 );
@@ -37,7 +37,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

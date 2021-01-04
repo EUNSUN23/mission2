@@ -5,17 +5,25 @@ import { push } from "react-router-redux";
 import Tab from "../../NavigationTab/Tabs/Tab";
 import SubPage from "../SubPage/SubPage";
 import styles from "./Page.module.css";
-import debounce from "lodash/debounce";
 
 const Page = (props) => {
+  const { currentMainPath, contents } = props;
   const [isSubClicked, setIsSubClicked] = useState(false);
   const [subClickCount, setSubClickCount] = useState(0);
   const [subPage, setSubPage] = useState(null);
   const dispatch = useDispatch();
 
-  const routePage = debounce((path) => {
-    dispatch(push(path));
-  }, 500);
+  useEffect(() => {
+    console.log(subClickCount);
+    let mainPath = currentMainPath.slice(1);
+    let endPoint = `${mainPath}/${subPage}`;
+    if (subClickCount > 1) {
+      endPoint = `${subPage}`;
+    }
+    console.log(endPoint);
+    console.log(mainPath);
+    isSubClicked && dispatch(push(endPoint));
+  }, [subPage, currentMainPath, isSubClicked, subClickCount]);
 
   const onSubTabHandler = (whichSub) => {
     setIsSubClicked(true);
@@ -24,42 +32,34 @@ const Page = (props) => {
     console.log(isSubClicked);
   };
 
-  useEffect(() => {
-    console.log(subClickCount);
-    let mainPath = props.currentMainPath.slice(1);
-    let endPoint = `${mainPath}/${subPage}`;
-    if (subClickCount > 1) {
-      endPoint = `${subPage}`;
-    }
-
-    console.log(endPoint);
-    isSubClicked && routePage(endPoint);
-  }, [subPage]);
+  const subTabs = Object.keys(contents[1]).map((subKey) => {
+    return (
+      <Tab
+        key={subKey}
+        routeTrigger={onSubTabHandler}
+        currentMainPath={currentMainPath}
+        clickedTab={subPage}
+      >
+        {subKey}
+      </Tab>
+    );
+  });
 
   const subPageRoute = isSubClicked && (
     <Route
-      path={`${props.currentMainPath}/${subPage}`}
-      render={() => <SubPage contents={props.contents.subPage[subPage]} />}
+      render={() => (
+        <SubPage part={subPage} contents={props.contents[1][subPage]} />
+      )}
     />
   );
   return (
     <>
-      <section className={styles.SubTab}>
-        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
-          sub1
-        </Tab>
-        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
-          sub2
-        </Tab>
-        <Tab routeTrigger={onSubTabHandler} clickedTab={subPage}>
-          sub3
-        </Tab>
-      </section>
+      <section className={styles.SubTab}>{subTabs}</section>
       <section className={styles.Container}>
         <article className={styles.MainContent}>
-          <h2>{props.contents.page}</h2>
+          <h2>{contents[0]}</h2>
           <div>
-            {props.contents.page} Lorem ipsum dolor sit amet, consectetur
+            {props.contents[0]} Lorem ipsum dolor sit amet, consectetur
             adipisicing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
             exercitation ullamco laboris nisi ut aliquip ex ea commodo

@@ -1,28 +1,15 @@
-import axios from "../../axios-page";
+import contents from "../../data/contentData";
 
-export const pushPage = (pageName, pageData) => {
+export const setRoute = (pageName) => {
   return {
-    type: "ROUTE_PAGE",
+    type: "SET_ROUTE",
     path: "/" + pageName,
-    contents: pageData,
   };
 };
 
-export const setPage = (page) => {
-  if (page === "") {
-    return (dispatch) => {
-      dispatch(pushPage(page, "Welcome"));
-    };
-  } else {
-    return (dispatch) => {
-      axios
-        .get("/" + page + ".json")
-        .then((response) => {
-          dispatch(pushPage(page, response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-  }
+export const setPage = (part) => {
+  return {
+    type: "SET_PAGE",
+    part: contents[part],
+  };
 };
