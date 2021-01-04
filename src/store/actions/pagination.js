@@ -1,4 +1,4 @@
-import contents from "../../data/contentData";
+import contents from "../../data/contentData.json";
 
 export const setRoute = (pageName) => {
   return {

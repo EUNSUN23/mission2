@@ -4,7 +4,7 @@ import { setPage, setRoute } from "../../../store/actions/pagination";
 import { history } from "../../../index";
 import { useDispatch, useSelector } from "react-redux";
 import Tab from "../Tabs/Tab";
-import pageData from "../../../data/contentData";
+import pageData from "../../../data/contentData.json";
 
 const MainTab = (props) => {
   const [isMainClicked, setIsMainClicked] = useState(false);

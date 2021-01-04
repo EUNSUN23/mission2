@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { push } from "react-router-redux";
@@ -12,23 +12,26 @@ const Page = (props) => {
   const [subClickCount, setSubClickCount] = useState(0);
   const [subPage, setSubPage] = useState(null);
   const dispatch = useDispatch();
+  const prevSub = useRef();
 
   useEffect(() => {
     console.log(subClickCount);
     let mainPath = currentMainPath.slice(1);
-    let endPoint = `${mainPath}/${subPage}`;
-    if (subClickCount > 1) {
-      endPoint = `${subPage}`;
+    let endPoint;
+    if (prevSub === subPage) {
+      endPoint = subPage;
+    } else {
+      endPoint = mainPath + "/" + subPage;
     }
-    console.log(endPoint);
-    console.log(mainPath);
-    isSubClicked && dispatch(push(endPoint));
+    prevSub.current = subPage;
+    isSubClicked && dispatch(push("/" + endPoint));
   }, [subPage, currentMainPath, isSubClicked, subClickCount]);
 
   const onSubTabHandler = (whichSub) => {
     setIsSubClicked(true);
     setSubPage(whichSub);
     setSubClickCount(subClickCount + 1);
+
     console.log(isSubClicked);
   };
 
