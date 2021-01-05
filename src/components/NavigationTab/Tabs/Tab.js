@@ -1,33 +1,28 @@
-import React, { useState, useEffect, memo } from "react";
-import { history } from "../../../index";
+import React, { useState, useEffect, useCallback, memo } from "react";
+
 import styles from "./Tab.module.css";
 
-const Tab = memo((props) => {
-  const clickedTab = props.clickedTab;
+const Tab = (props) => {
+  const { isClicked, currentLocation, url, onClickHandler } = props;
 
-  const [tabClassName, setTabClassName] = useState("UnClicked");
-  const currentMainPath = props.currentMainPath;
-  console.log("reducer상의 path : " + currentMainPath);
-  console.log("history상의 path : " + history.location.pathname);
-
-  useEffect(() => {
-    if (clickedTab == props.children) {
-      setTabClassName("Clicked");
+  const setClassName = useCallback(() => {
+    if (isClicked && currentLocation.includes(url)) {
+      return "Clicked";
     } else {
-      setTabClassName("UnClicked");
+      return "UnClicked";
     }
-  }, [clickedTab]);
+  }, [currentLocation, url, isClicked]);
 
   return (
     <li
       onClick={() => {
-        props.routeTrigger(props.children);
+        onClickHandler();
       }}
-      className={styles[tabClassName]}
+      className={styles[setClassName()]}
     >
       {props.children}
     </li>
   );
-});
+};
 
 export default Tab;

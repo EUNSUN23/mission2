@@ -1,80 +1,70 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { push } from "react-router-redux";
-import Tab from "../../NavigationTab/Tabs/Tab";
-import SubPage from "../SubPage/SubPage";
+import MainContents from "../../PageContents/Item/MainContents";
+import SubContents from "../../PageContents/Item/SubContents";
 import styles from "./Page.module.css";
+import NavigationTabs from "../../NavigationTab/NavigationTabs";
+import { history } from "../../../index";
 
-const Page = (props) => {
-  const { currentMainPath, contents } = props;
+const Page = () => {
+  const [isMainClicked, setIsMainClicked] = useState(false);
   const [isSubClicked, setIsSubClicked] = useState(false);
-  const [subClickCount, setSubClickCount] = useState(0);
-  const [subPage, setSubPage] = useState(null);
-  const dispatch = useDispatch();
-  const prevSub = useRef();
+  const currentPath = history.location.pathname;
+  console.log(currentPath);
 
-  useEffect(() => {
-    console.log(subClickCount);
-    let mainPath = currentMainPath.slice(1);
-    let endPoint;
-    if (prevSub === subPage) {
-      endPoint = subPage;
-    } else {
-      endPoint = mainPath + "/" + subPage;
-    }
-    prevSub.current = subPage;
-    isSubClicked && dispatch(push("/" + endPoint));
-  }, [subPage, currentMainPath, isSubClicked, subClickCount]);
-
-  const onSubTabHandler = (whichSub) => {
-    setIsSubClicked(true);
-    setSubPage(whichSub);
-    setSubClickCount(subClickCount + 1);
-
-    console.log(isSubClicked);
-  };
-
-  const subTabs = Object.keys(contents[1]).map((subKey) => {
-    return (
-      <Tab
-        key={subKey}
-        routeTrigger={onSubTabHandler}
-        currentMainPath={currentMainPath}
-        clickedTab={subPage}
-      >
-        {subKey}
-      </Tab>
-    );
+  const mainContents = useSelector((state) => {
+    return state.reducer.mainContents;
   });
 
-  const subPageRoute = isSubClicked && (
+  const subContents = useSelector((state) => {
+    return state.reducer.subContents;
+  });
+
+  const dispatch = useDispatch();
+
+  const routeTrigger = useCallback(
+    (path) => {
+      dispatch(push(`${currentPath}${path}`));
+    },
+    [dispatch]
+  );
+
+  const setMainTab = () => {
+    setIsMainClicked((prevMainClicked) => !prevMainClicked);
+  };
+
+  const setSubTab = () => {
+    setIsSubClicked((prevSubClicked) => !prevSubClicked);
+  };
+
+  const mainRoute = isMainClicked && (
     <Route
-      render={() => (
-        <SubPage part={subPage} contents={props.contents[1][subPage]} />
-      )}
+      path={`${currentPath}`}
+      render={() => <MainContents contents={mainContents} />}
     />
   );
+
+  const subRoute = isSubClicked && (
+    <Route
+      path={`${currentPath}`}
+      render={() => <SubContents contents={subContents} />}
+    />
+  );
+
   return (
     <>
-      <section className={styles.SubTab}>{subTabs}</section>
-      <section className={styles.Container}>
-        <article className={styles.MainContent}>
-          <h2>{contents[0]}</h2>
-          <div>
-            {props.contents[0]} Lorem ipsum dolor sit amet, consectetur
-            adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </div>
-          <article className={styles.SubContent}>
-            {subPageRoute || null}
-          </article>
-        </article>
+      <section className={styles.NavigationTabs}>
+        <NavigationTabs
+          routeTrigger={routeTrigger}
+          setSubTab={setSubTab}
+          setMainTab={setMainTab}
+        />
+      </section>
+      <section className={styles.Contents}>
+        <article className={styles.MainContent}>{mainRoute || null}</article>
+        <article className={styles.SubContent}>{subRoute || null}</article>
       </section>
     </>
   );

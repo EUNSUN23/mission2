@@ -1,15 +1,20 @@
-import contents from "../../data/contentData.json";
-
-export const setRoute = (pageName) => {
+export const setRoute = (url) => {
   return {
     type: "SET_ROUTE",
-    path: "/" + pageName,
+    path: url,
   };
 };
 
-export const setPage = (part) => {
+export const setMainContents = (data) => {
   return {
-    type: "SET_PAGE",
-    part: contents[part],
+    type: "SET_MAIN_CONTENTS",
+    contents: data,
+  };
+};
+
+export const setSubContents = (data) => {
+  return {
+    type: "SET_SUB_CONTENTS",
+    contents: data,
   };
 };
