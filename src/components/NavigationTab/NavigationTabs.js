@@ -1,21 +1,16 @@
 import React, { useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
 import pageData from "../../data/contentData.json";
-import {
-  setMainContents,
-  setSubContents,
-  setRoute,
-} from "../../store/actions/pagination";
+import { setContents, setRoute } from "../../store/actions/pagination";
 import { history } from "../../index";
 import Tab from "./Tabs/Tab";
 
 const NavigationTabs = memo((props) => {
   const {
     isMainClicked,
-    isSubClicked,
+
     routeTrigger,
-    setMainTab,
-    setSubTab,
+
     currentPath,
   } = props;
 
@@ -25,14 +20,19 @@ const NavigationTabs = memo((props) => {
 
   useEffect(() => {
     routeTrigger(path);
-  }, [path, routeTrigger]);
+  }, [path, routeTrigger, currentPath, isMainClicked]);
 
   const onMainTabHandler = (page, path, contents) => {
     setMainPage(page);
     setPath(path);
 
     dispatch(setRoute(`${currentPath}${path}`));
-    dispatch(setMainContents(contents));
+    dispatch(setContents(contents));
+  };
+
+  const onSubTabHandler = (path) => {
+    setPath(path);
+    dispatch(setRoute(`${currentPath}${path}`));
   };
 
   const mainTabs = Object.keys(pageData).map((pageKey) => {
@@ -42,11 +42,7 @@ const NavigationTabs = memo((props) => {
         url={"/items" + pageData[pageKey][0][1]}
         currentLocation={history.location.pathname}
         onClickHandler={() => {
-          onMainTabHandler(
-            pageKey,
-            pageData[pageKey][0][1],
-            pageData[pageKey][0][0]
-          );
+          onMainTabHandler(pageKey, pageData[pageKey][0][1], pageData[pageKey]);
         }}
       >
         {pageKey}
@@ -59,14 +55,19 @@ const NavigationTabs = memo((props) => {
   let subTabs = null;
   if (isMainClicked && mainPage) {
     const subDataArr = pageData[mainPage][1];
-    subTabs = subDataArr.map((subPage) => {
+    subTabs = subDataArr.map((subData) => {
+      const subPage = subData[0];
+      const subKey = subData[2];
       return (
         <Tab
           key={`${mainPage}-${subPage}`}
-          url={"/items" + subDataArr[2]}
+          url={subDataArr[2]}
           currentLocation={history.location.pathname}
+          onClickHandler={() => {
+            onSubTabHandler(subKey);
+          }}
         >
-          {subPage}
+          {`${mainPage}-${subPage}`}
         </Tab>
       );
     });

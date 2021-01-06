@@ -5,16 +5,9 @@ export const setRoute = (url) => {
   };
 };
 
-export const setMainContents = (data) => {
+export const setContents = (data) => {
   return {
-    type: "SET_MAIN_CONTENTS",
-    contents: data,
-  };
-};
-
-export const setSubContents = (data) => {
-  return {
-    type: "SET_SUB_CONTENTS",
+    type: "SET_CONTENTS",
     contents: data,
   };
 };

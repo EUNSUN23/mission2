@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "react-router-redux";
 import MainContents from "../../PageContents/Item/MainContents";
@@ -10,41 +10,33 @@ import { history } from "../../../index";
 
 const Page = () => {
   const [isMainClicked, setIsMainClicked] = useState(false);
-  const [isSubClicked, setIsSubClicked] = useState(false);
+  const [baseURL, setBaseURL] = useState("");
   const currentPath = history.location.pathname;
   console.log(currentPath);
 
-  const mainContents = useSelector((state) => {
-    return state.reducer.mainContents;
-  });
-
-  const subContents = useSelector((state) => {
-    return state.reducer.subContents;
+  const contents = useSelector((state) => {
+    return state.reducer.contents;
   });
 
   const dispatch = useDispatch();
 
   const routeTrigger = useCallback(
     (path) => {
-      setIsMainClicked(true);
+      setIsMainClicked(!isMainClicked);
+      setBaseURL(path);
       dispatch(push(`${currentPath}${path || ""}`));
     },
     [dispatch]
   );
 
-  console.log(currentPath, isMainClicked);
+  let mainRoute = null;
 
-  const mainRoute = isMainClicked && (
+  mainRoute = isMainClicked && (
     <Route
-      path={`${currentPath}`}
-      render={() => <MainContents contents={mainContents} />}
-    />
-  );
-
-  const subRoute = isSubClicked && (
-    <Route
-      path={`${currentPath}`}
-      render={() => <SubContents contents={subContents} />}
+      path={`/items${baseURL}`}
+      render={() => (
+        <MainContents currentPath={currentPath} contents={contents} />
+      )}
     />
   );
 
@@ -54,15 +46,9 @@ const Page = () => {
         <NavigationTabs
           routeTrigger={routeTrigger}
           isMainClicked={isMainClicked}
-          isSubClicked={isSubClicked}
-          // setSubTab={setSubTab}
-          // setMainTab={setMainTab}
         />
       </section>
-      <section className={styles.Contents}>
-        <article className={styles.MainContent}>{mainRoute || null}</article>
-        <article className={styles.SubContent}>{subRoute || null}</article>
-      </section>
+      <section className={styles.Contents}>{mainRoute}</section>
     </>
   );
 };
