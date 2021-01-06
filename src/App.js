@@ -20,7 +20,7 @@ const App = () => {
         <Layout>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
-            <Route exact path="/items" render={() => <Page />} />
+            <Route path="/items" render={() => <Page />} />
           </Switch>
         </Layout>
       </div>

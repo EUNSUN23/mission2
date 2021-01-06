@@ -26,7 +26,7 @@ const Page = () => {
 
   const routeTrigger = useCallback(
     (path) => {
-      dispatch(push(`${currentPath}${path}`));
+      dispatch(push(`${currentPath}${path || ""}`));
     },
     [dispatch]
   );
