@@ -26,18 +26,13 @@ const Page = () => {
 
   const routeTrigger = useCallback(
     (path) => {
+      setIsMainClicked(true);
       dispatch(push(`${currentPath}${path || ""}`));
     },
     [dispatch]
   );
 
-  const setMainTab = () => {
-    setIsMainClicked((prevMainClicked) => !prevMainClicked);
-  };
-
-  const setSubTab = () => {
-    setIsSubClicked((prevSubClicked) => !prevSubClicked);
-  };
+  console.log(currentPath, isMainClicked);
 
   const mainRoute = isMainClicked && (
     <Route
@@ -58,8 +53,10 @@ const Page = () => {
       <section className={styles.NavigationTabs}>
         <NavigationTabs
           routeTrigger={routeTrigger}
-          setSubTab={setSubTab}
-          setMainTab={setMainTab}
+          isMainClicked={isMainClicked}
+          isSubClicked={isSubClicked}
+          // setSubTab={setSubTab}
+          // setMainTab={setMainTab}
         />
       </section>
       <section className={styles.Contents}>
@@ -70,4 +67,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default React.memo(Page);

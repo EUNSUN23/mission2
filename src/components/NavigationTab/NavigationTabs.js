@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
 import pageData from "../../data/contentData.json";
 import {
@@ -9,66 +9,68 @@ import {
 import { history } from "../../index";
 import Tab from "./Tabs/Tab";
 
-const NavigationTabs = (props) => {
-  const { isMainClicked, isSubClicked, routeTrigger } = props;
+const NavigationTabs = memo((props) => {
+  const {
+    isMainClicked,
+    isSubClicked,
+    routeTrigger,
+    setMainTab,
+    setSubTab,
+    currentPath,
+  } = props;
 
   const [path, setPath] = useState();
   const [mainPage, setMainPage] = useState("");
   const dispatch = useDispatch();
 
-  const onMainTabHandler = (page, path, contents) => {
-    setMainPage(page);
-    setPath(path);
-    dispatch(setRoute(path));
-    dispatch(setMainContents(contents));
-  };
-
-  const onSubTabHandler = (path, contents) => {
-    setPath(path);
-    dispatch(setRoute(path));
-    dispatch(setSubContents(contents));
-  };
-
   useEffect(() => {
     routeTrigger(path);
   }, [path, routeTrigger]);
+
+  const onMainTabHandler = (page, path, contents) => {
+    setMainPage(page);
+    setPath(path);
+
+    dispatch(setRoute(`${currentPath}${path}`));
+    dispatch(setMainContents(contents));
+  };
 
   const mainTabs = Object.keys(pageData).map((pageKey) => {
     return (
       <Tab
         key={pageKey}
-        isClicked={isMainClicked}
-        onClickHandler={() =>
+        url={"/items" + pageData[pageKey][0][1]}
+        currentLocation={history.location.pathname}
+        onClickHandler={() => {
           onMainTabHandler(
             pageKey,
             pageData[pageKey][0][1],
             pageData[pageKey][0][0]
-          )
-        }
-        currentLocation={history.location.pathname}
+          );
+        }}
       >
         {pageKey}
       </Tab>
     );
   });
 
-  const subDataArr = isMainClicked && pageData[mainPage][1];
+  console.log(isMainClicked);
 
-  const subTabs =
-    isMainClicked &&
-    subDataArr.map((subPage) => {
+  let subTabs = null;
+  if (isMainClicked && mainPage) {
+    const subDataArr = pageData[mainPage][1];
+    subTabs = subDataArr.map((subPage) => {
       return (
         <Tab
           key={`${mainPage}-${subPage}`}
-          url={subDataArr[2]}
-          isClicked={isSubClicked}
-          onClickHandler={() => onSubTabHandler(subDataArr[1], subDataArr[2])}
+          url={"/items" + subDataArr[2]}
           currentLocation={history.location.pathname}
         >
           {subPage}
         </Tab>
       );
     });
+  }
 
   return (
     <section className="NavigationTabs">
@@ -76,6 +78,6 @@ const NavigationTabs = (props) => {
       {subTabs}
     </section>
   );
-};
+});
 
 export default NavigationTabs;
