@@ -1,21 +1,17 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect, memo, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { replace } from "react-router-redux";
 import pageData from "../../data/contentData.json";
 import { setContents, setRoute } from "../../store/actions/pagination";
 import { history } from "../../index";
 import Tab from "./Tabs/Tab";
 
 const NavigationTabs = memo((props) => {
-  const {
-    isMainClicked,
-
-    routeTrigger,
-
-    currentPath,
-  } = props;
+  const { routeTrigger, currentPath, isMainClicked } = props;
 
   const [path, setPath] = useState();
   const [mainPage, setMainPage] = useState("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {

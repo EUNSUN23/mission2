@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
 import SubContents from "./SubContents";
 
+import { history } from "../../../index";
 const MainContents = (props) => {
-  const { contents, currentPath } = props;
+  let { contents, currentPath, isBackClicked } = props;
+  const [isBack, setIsBack] = useState(false);
+  const dispatch = useDispatch();
 
-  console.log("MAIN RENDER", contents, currentPath);
+  isBackClicked && console.log("BackClicked", currentPath, contents);
 
   const mainData = contents[0][0];
   const subData = contents[1][2];
