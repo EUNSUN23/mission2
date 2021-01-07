@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Route } from "react-router-dom";
+import pageData from "../../../data/contentData.json";
 import SubContents from "./SubContents";
 
-import { history } from "../../../index";
-const MainContents = (props) => {
-  let { contents, currentPath, isBackClicked } = props;
-  const [isBack, setIsBack] = useState(false);
-  const dispatch = useDispatch();
-
-  isBackClicked && console.log("BackClicked", currentPath, contents);
-
-  const mainData = contents[0][0];
-  const subData = contents[1][2];
+const MainContents = ({ currentPath }) => {
+  const pageKey = currentPath.slice(7, 12);
+  const subKey = currentPath.slice(13);
+  const contents = pageData[pageKey];
+  const mainContents = contents[0][1];
+  const subContents = contents[1][subKey][1];
 
   let subRoute = null;
 
@@ -21,7 +18,7 @@ const MainContents = (props) => {
       <Route
         path={currentPath}
         render={() => (
-          <SubContents currentPath={currentPath} contents={subData} />
+          <SubContents currentPath={currentPath} contents={subContents} />
         )}
       />
     );
@@ -30,7 +27,7 @@ const MainContents = (props) => {
     <>
       <h4>MainContents</h4>
       <div>
-        <strong>{mainData}</strong>
+        <strong>{mainContents}</strong>
         text text text text text text text text text text text text text text
         text text text text text text text text text text text text text text
         text text text text text text text text text text text text text text

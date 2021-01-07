@@ -18,12 +18,10 @@ const NavigationTabs = memo((props) => {
     routeTrigger(path);
   }, [path, routeTrigger, currentPath, isMainClicked]);
 
-  const onMainTabHandler = (page, path, contents) => {
+  const onMainTabHandler = (page, path) => {
     setMainPage(page);
     setPath(path);
-
     dispatch(setRoute(`${currentPath}${path}`));
-    dispatch(setContents(contents));
   };
 
   const onSubTabHandler = (path) => {
@@ -35,10 +33,10 @@ const NavigationTabs = memo((props) => {
     return (
       <Tab
         key={pageKey}
-        url={"/items" + pageData[pageKey][0][1]}
+        url={"/items" + pageData[pageKey][0][0]}
         currentLocation={history.location.pathname}
         onClickHandler={() => {
-          onMainTabHandler(pageKey, pageData[pageKey][0][1], pageData[pageKey]);
+          onMainTabHandler(pageKey, pageData[pageKey][0][0]);
         }}
       >
         {pageKey}
@@ -50,8 +48,8 @@ const NavigationTabs = memo((props) => {
 
   let subTabs = null;
   if (isMainClicked && mainPage) {
-    const subDataArr = pageData[mainPage][1];
-    subTabs = subDataArr.map((subData) => {
+    const subData = pageData[mainPage][1];
+    subTabs = subData.map((sub) => {
       const subPage = subData[0];
       const subKey = subData[2];
       return (

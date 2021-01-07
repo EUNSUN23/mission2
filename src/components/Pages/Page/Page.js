@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { push, replace } from "react-router-redux";
+import { push } from "react-router-redux";
 import MainContents from "../../PageContents/Item/MainContents";
 import styles from "./Page.module.css";
 import NavigationTabs from "../../NavigationTab/NavigationTabs";
@@ -12,25 +12,20 @@ const Page = () => {
   const [isMainClicked, setIsMainClicked] = useState(false);
   const [baseURL, setBaseURL] = useState("");
   const [isBackClicked, setIsBackClicked] = useState(false);
+  const [onPopstate, setOnPopState] = useState(false);
 
   let currentPath = history.location.pathname;
   console.log(currentPath);
 
   useEffect(() => {
     if (isBackClicked) {
-      setBaseURL(currentPath.slice(6));
+      const prevPath = currentPath.slice(6);
+      setBaseURL(prevPath);
+      console.log(prevPath, "USE EFFECT");
     }
-  }, [currentPath]);
+  }, [currentPath, onPopstate]);
 
   const dispatch = useDispatch();
-
-  let contents = useSelector((state) => {
-    return state.reducer.contents;
-  });
-
-  let url = useSelector((state) => {
-    return state.reducer.url;
-  });
 
   const routeTrigger = useCallback(
     (path) => {
@@ -45,6 +40,7 @@ const Page = () => {
 
   const backEventHandler = () => {
     setIsBackClicked(true);
+    setOnPopState(!onPopstate);
   };
 
   window.onpopstate = function (event) {
@@ -57,13 +53,7 @@ const Page = () => {
     mainRoute = (
       <Route
         path={`/items${baseURL}`}
-        render={() => (
-          <MainContents
-            currentPath={currentPath}
-            contents={contents}
-            isBackClicked={isBackClicked}
-          />
-        )}
+        render={() => <MainContents currentPath={currentPath} />}
       />
     );
   }
