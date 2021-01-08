@@ -1,4 +1,14 @@
 .NavigationTabs {
-  border: 1px solid black;
-  color: black;
+}
+
+.MainTabs,
+.SubTabs {
+  display: flex;
+  margin: 0 0 1px 0;
+  padding: 0;
+}
+
+.MainTabs li,
+.SubTabs li {
+  flex: 1;
 }

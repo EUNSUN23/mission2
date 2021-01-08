@@ -8,7 +8,6 @@ import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 import { routerMiddleware, connectRouter } from "connected-react-router";
 import thunk from "redux-thunk";
 import reportWebVitals from "./reportWebVitals";
-import pagination from "./store/reducer/pagination";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +18,7 @@ export const history = createBrowserHistory();
 const store = createStore(
   combineReducers({
     router: connectRouter(history),
-    reducer: pagination,
+    // reducer: pagination,
   }), // root reducer with router state
   composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
 );

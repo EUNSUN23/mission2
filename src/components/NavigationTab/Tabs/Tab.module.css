@@ -3,6 +3,9 @@
   text-align: center;
   color: #ffffff;
   border-right: 1px solid #ffffff;
+  padding: 1px 0;
+  list-style: none;
+  line-height: 100%;
 }
 
 .Clicked {
@@ -10,6 +13,9 @@
   text-align: center;
   color: #ffffff;
   border-right: 1px solid #ffffff;
+  padding: 1px 0;
+  list-style: none;
+  line-height: 100%;
 }
 
 .UnClicked:last-of-type,

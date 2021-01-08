@@ -1,28 +1,31 @@
 import React, { useState, useEffect, useCallback, memo } from "react";
-
+import { history } from "../../../index";
+import { useSelector } from "react-redux";
 import styles from "./Tab.module.css";
 
 const Tab = (props) => {
-  const { isClicked, currentLocation, url, onClickHandler } = props;
+  const { url, onClickHandler, isClicked, currentPath } = props;
+  const [open, setOpen] = useState(false);
 
-  const setClassName = useCallback(() => {
-    if (isClicked && currentLocation.includes(url)) {
-      return "Clicked";
+  useEffect(() => {
+    console.log(currentPath, url);
+    if (isClicked && currentPath.includes(url)) {
+      setOpen(true);
     } else {
-      return "UnClicked";
+      setOpen(false);
     }
-  }, [currentLocation, url, isClicked]);
+  }, [isClicked, currentPath]);
 
   return (
     <li
       onClick={() => {
         onClickHandler();
       }}
-      className={styles[setClassName()]}
+      className={open ? styles.Clicked : styles.UnClicked}
     >
       {props.children}
     </li>
   );
 };
 
-export default Tab;
+export default React.memo(Tab);

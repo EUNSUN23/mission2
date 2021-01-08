@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "react-router-redux";
 import MainContents from "../../PageContents/Item/MainContents";
 import styles from "./Page.module.css";
-import NavigationTabs from "../../NavigationTab/NavigationTabs";
+import NavigationTabs from "../../NavigationTab/Tabs/NavigationTabs";
 import { history } from "../../../index";
-import { setRoute, setContents } from "../../../store/actions/pagination";
 
 const Page = () => {
   const [isMainClicked, setIsMainClicked] = useState(false);
@@ -14,12 +13,13 @@ const Page = () => {
   const [isBackClicked, setIsBackClicked] = useState(false);
   const [onPopstate, setOnPopState] = useState(false);
 
-  let currentPath = history.location.pathname;
+  const currentPath = history.location.pathname;
   console.log(currentPath);
 
   useEffect(() => {
     if (isBackClicked) {
       const prevPath = currentPath.slice(6);
+      console.log(prevPath);
       setBaseURL(prevPath);
       console.log(prevPath, "USE EFFECT");
     }
@@ -47,8 +47,6 @@ const Page = () => {
     backEventHandler();
   };
 
-  console.log("back: ", isBackClicked, baseURL);
-
   if (isMainClicked || isBackClicked) {
     mainRoute = (
       <Route
@@ -57,8 +55,6 @@ const Page = () => {
       />
     );
   }
-
-  console.log("MAIN ROUTE: ", mainRoute);
 
   return (
     <>

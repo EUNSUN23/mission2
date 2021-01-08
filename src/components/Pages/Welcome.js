@@ -9,4 +9,4 @@ const welcome = (props) => {
   );
 };
 
-export default welcome;
+export default React.memo(welcome);
