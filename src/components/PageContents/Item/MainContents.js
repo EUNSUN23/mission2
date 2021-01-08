@@ -1,6 +1,7 @@
 import { Route } from "react-router-dom";
 import pageData from "../../../data/contentData.json";
 import SubContents from "./SubContents";
+import { history } from "../../../index";
 
 const MainContents = ({ currentPath }) => {
   if (currentPath.includes("page")) {

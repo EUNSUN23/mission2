@@ -13,8 +13,9 @@ const Page = () => {
   const [isBackClicked, setIsBackClicked] = useState(false);
   const [onPopstate, setOnPopState] = useState(false);
 
-  const currentPath = history.location.pathname;
-  console.log(currentPath);
+  let currentPath = useSelector((state) => {
+    return state.router.location.pathname;
+  });
 
   useEffect(() => {
     if (isBackClicked) {
@@ -23,7 +24,7 @@ const Page = () => {
       setBaseURL(prevPath);
       console.log(prevPath, "USE EFFECT");
     }
-  }, [currentPath, onPopstate]);
+  }, [currentPath]);
 
   const dispatch = useDispatch();
 
@@ -38,14 +39,16 @@ const Page = () => {
 
   let mainRoute = null;
 
-  const backEventHandler = () => {
+  const backEventHandler = useCallback(() => {
     setIsBackClicked(true);
     setOnPopState(!onPopstate);
-  };
+  }, []);
 
   window.onpopstate = function (event) {
     backEventHandler();
   };
+
+  console.log(isMainClicked, isBackClicked);
 
   if (isMainClicked || isBackClicked) {
     mainRoute = (
@@ -62,6 +65,7 @@ const Page = () => {
         <NavigationTabs
           routeTrigger={routeTrigger}
           isMainClicked={isMainClicked}
+          currentPath={currentPath}
         />
       </section>
       <section className={styles.Contents}>{mainRoute}</section>

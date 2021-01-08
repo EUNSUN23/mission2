@@ -23,4 +23,4 @@ const MenuBar = () => {
   );
 };
 
-export default React.memo(MenuBar);
+export default MenuBar;

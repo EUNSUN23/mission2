@@ -14,7 +14,7 @@ const Tab = (props) => {
     } else {
       setOpen(false);
     }
-  }, [isClicked, currentPath]);
+  }, [currentPath]);
 
   return (
     <li

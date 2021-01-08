@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import pageData from "../../../data/contentData.json";
-import { history } from "../../../index";
 import Tab from "./Tab";
 import styles from "./NavigationTabs.module.css";
 
@@ -10,18 +9,18 @@ const NavigationTabs = memo((props) => {
   const [isClicked, setIsClicked] = useState(false);
   const [path, setPath] = useState();
   const [mainPage, setMainPage] = useState("");
-  const currentPath = useSelector((state) => {
-    return state.router.location.pathname;
-  });
-
   const mainTabKey = Object.keys(pageData);
 
   const subTabKey = mainPage && pageData[mainPage][1];
+  const currentPath = useSelector((state) => {
+    return state.router.location.pathname;
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("PUSH PATH");
     routeTrigger(path);
-  }, [path, routeTrigger, currentPath, isMainClicked]);
+  }, [path, routeTrigger, isMainClicked, isClicked]);
 
   const onMainTabHandler = useCallback(
     (page, path) => {

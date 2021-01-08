@@ -17,4 +17,4 @@ const SubContents = (props) => {
   );
 };
 
-export default React.memo(SubContents);
+export default SubContents;
