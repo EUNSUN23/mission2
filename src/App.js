@@ -4,7 +4,10 @@ import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Welcome from "./components/Pages/Welcome";
 import { replace } from "react-router-redux";
-import Page from "./components/Pages/Page/Page";
+import OverView from "./components/Pages/OverView/OverView";
+import Community from "./components/Pages/Community/Community";
+import Intro from "./components/Pages/Intro/Intro";
+import Notice from "./components/Pages/Notice/Notice";
 
 const App = () => {
   console.log("APP_RENDER");
@@ -20,7 +23,10 @@ const App = () => {
         <Layout>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
-            <Route path="/items" render={() => <Page />} />
+            <Route path="/intro" component={Intro} />
+            <Route path="/overview" render={() => <OverView />} />
+            <Route path="/community" component={Community} />
+            <Route path="/notice" component={Notice} />
           </Switch>
         </Layout>
       </div>

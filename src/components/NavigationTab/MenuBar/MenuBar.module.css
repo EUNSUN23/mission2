@@ -7,21 +7,18 @@
   color: #ffffff;
 }
 
-.MenuBar li {
+.MenuBar .inActive {
   flex: 1;
   padding: 7px 0;
-  line-height: 100%;
-  list-style: none;
   text-align: center;
   background-color: #fb7d00;
   color: #ffffff;
+  text-decoration: none;
 }
 
-.Active {
+.MenuBar .Active {
   flex: 1;
   padding: 7px 0;
-  line-height: 100%;
-  list-style: none;
   text-align: center;
   background-color: #ffac59;
   color: #ffffff;

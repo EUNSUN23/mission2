@@ -1,0 +1,5 @@
+.Layout {
+  padding: 0;
+  flex-flow: column nowrap;
+  justify-content: center;
+}

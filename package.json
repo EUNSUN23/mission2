@@ -11,6 +11,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "connected-react-router": "^6.8.0",
+    "express": "^4.17.1",
     "history": "^4.10.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -26,6 +27,7 @@
     "redux-firestore": "^0.5.7",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
+    "tui-grid": "^4.16.1",
     "web-vitals": "^0.2.4",
     "webpack-dev-server": "^3.11.0"
   },

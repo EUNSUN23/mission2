@@ -6,7 +6,7 @@ const Header = memo((props) => {
   return (
     <>
       <header>
-        <NavLink to="/" activeClassName={styles.Active}>
+        <NavLink to="/" className={styles.Header}>
           Welcome to my first app!
         </NavLink>
       </header>

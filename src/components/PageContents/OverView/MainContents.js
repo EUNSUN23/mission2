@@ -1,18 +1,21 @@
 import { Route } from "react-router-dom";
 import pageData from "../../../data/contentData.json";
 import SubContents from "./SubContents";
-import { history } from "../../../index";
+import { useSelector } from "react-redux";
 
-const MainContents = ({ currentPath }) => {
+const MainContents = () => {
+  const currentPath = useSelector((state) => {
+    return state.router.location.pathname;
+  });
   if (currentPath.includes("page")) {
-    const pageKey = currentPath.slice(7, 12);
+    const pageKey = currentPath.slice(10, 15);
     const contents = pageData[pageKey];
     const mainContents = contents[0][1];
 
     let subRoute = null;
 
     if (currentPath.includes("sub")) {
-      const subKey = currentPath.slice(13);
+      const subKey = currentPath.slice(16);
       const subContents = contents[1][subKey][1];
       subRoute = (
         <Route

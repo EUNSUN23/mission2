@@ -1,0 +1,13 @@
+ { "boards": 
+    [ 
+        { "brdNo": 1, 
+          "brdWriter": "lee SunSin", 
+          "brdTitle": "if you intend to live then you die", 
+          "brdDate": "21.01.08" },
+
+        { "brdNo": 2, 
+          "brdWriter": "So SiNo", 
+          "brdTitle": "Founder for two countries", 
+          "brdDate": "21.01.08" } 
+        ] 
+ }
