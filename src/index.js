@@ -9,6 +9,7 @@ import { routerMiddleware, connectRouter } from "connected-react-router";
 import thunk from "redux-thunk";
 import reportWebVitals from "./reportWebVitals";
 import reducer from "./store/reducers/board";
+import auth from "./store/reducers/auth";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Add the reducer to your store on the `routing` key
@@ -19,6 +20,7 @@ const store = createStore(
   combineReducers({
     router: connectRouter(history),
     reducer: reducer,
+    auth: auth,
   }), // root reducer with router state
   composeEnhancers(applyMiddleware(routerMiddleware(history), thunk))
 );

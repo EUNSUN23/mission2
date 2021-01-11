@@ -8,6 +8,7 @@ import OverView from "./components/Pages/OverView/OverView";
 import Community from "./components/Pages/Community/Community";
 import Intro from "./components/Pages/Intro/Intro";
 import Notice from "./components/Pages/Notice/Notice";
+import SignUp from "./components/SignUp";
 
 const App = () => {
   console.log("APP_RENDER");
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/overview" render={() => <OverView />} />
             <Route path="/community" component={Community} />
             <Route path="/notice" component={Notice} />
+            <Route path="/signUp" component={SignUp} />
           </Switch>
         </Layout>
       </div>
