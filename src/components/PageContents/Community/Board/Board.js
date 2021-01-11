@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BoardItem from "./BoardItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addBoard, deleteBoard } from "../../../../store/actions/board";
 import styles from "./Board.module.css";
 import useInput from "../../../../hooks/useInput";
-import useIsValid from "../../../../hooks/useIsValid";
+import useAddData from "../../../../hooks/useAddData";
 
 const Board = () => {
   const [text, setText] = useInput("");
-  const [submit, setSubmit] = useIsValid("");
+  const [author, setAuthor] = useState("");
+  const setNewData = useAddData();
 
   const boardData = useSelector((state) => {
     return state.reducer.data;
@@ -21,10 +22,10 @@ const Board = () => {
     dispatch(deleteBoard(itemKey));
   };
 
-  const boardItems = Object.keys(boardData).map((brd) => {
+  const boardItems = Object.keys(boardData).map((brd, idx) => {
     return (
       <BoardItem
-        key={`board-${brd}`}
+        key={`board-${boardData[brd].no}`}
         number={boardData[brd].no}
         title={boardData[brd].title}
         date={boardData[brd].date}
@@ -37,15 +38,17 @@ const Board = () => {
   return (
     <>
       <form>
-        <textarea value={text} onChange={setText}></textarea>
-        <button
-          type="submit"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSubmit(text);
-          }}
-        >
-          글쓰기
+        <label htmlFor="author">작성자: </label>
+        <input
+          id="author"
+          type="text"
+          value={author}
+          onChange={({ target: { value } }) => setAuthor(value)}
+        />
+        <label htmlFor="text">내용 :</label>
+        <textarea id="text" value={text} onChange={setText}></textarea>
+        <button type="submit" onClick={(e) => setNewData(e, author, text)}>
+          추가
         </button>
       </form>
       <div className={styles.board}>

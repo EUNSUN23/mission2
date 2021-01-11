@@ -1,7 +1,7 @@
-export const addBoard = (key) => {
+export const addBoard = (data) => {
   return {
     type: "ADD",
-    brdKey: key,
+    data: data,
   };
 };
 

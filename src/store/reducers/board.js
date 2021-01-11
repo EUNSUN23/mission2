@@ -30,9 +30,10 @@ const deleteBoard = (state, key) => {
   return state;
 };
 
-const addBoard = (state, board) => {
-  const addedBoard = [...state.data, board];
-  return { ...state, ...addedBoard };
+const addBoard = (state, newData) => {
+  const addedBoard = [...state.data].concat(newData);
+  state.data = addedBoard;
+  return state;
 };
 
 const reducer = (state = board, action) => {
@@ -40,7 +41,7 @@ const reducer = (state = board, action) => {
     case "DELETE":
       return deleteBoard(state, action.brdKey);
     case "ADD":
-      return addBoard(state, action.board);
+      return addBoard(state, action.data);
     default:
       return state;
   }
