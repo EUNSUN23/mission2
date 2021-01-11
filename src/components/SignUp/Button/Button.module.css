@@ -1,0 +1,10 @@
+.Wrapper {
+  display: flex;
+  margin: 10px 0;
+
+  justify-content: center;
+}
+
+.Button {
+  margin: 0 0 0 3px;
+}

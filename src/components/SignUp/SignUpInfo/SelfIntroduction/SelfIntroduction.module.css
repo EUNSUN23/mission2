@@ -1,0 +1,14 @@
+.SelfIntroWrapper {
+  padding: 0 2px;
+  margin: 10px 0;
+}
+
+.Textarea {
+  width: 350px;
+  resize: none;
+}
+
+.LetterCounter {
+  color: 1px solid #b6b6b6;
+  font-size: 14px;
+}

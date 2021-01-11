@@ -1,0 +1,23 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  box-shadow: 10px 10px 5px grey;
+  transition: all ease-out;
+  border: 1px solid #888;
+  width: 100%; /* Could be more or less, depending on screen size */
+}
+
+.Modal ul {
+  padding: 0px;
+}
+.Modal li {
+  list-style: none;
+  font-size: 15px;
+  padding: 5px 0;
+}

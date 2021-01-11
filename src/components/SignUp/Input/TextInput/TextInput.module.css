@@ -1,0 +1,19 @@
+.Wrapper {
+  position: relative;
+
+  margin: 10px 0;
+  padding: 4px 2px;
+}
+
+.Input {
+  margin: 3px 0;
+}
+
+.Input input {
+  border: 1px solid #b6b6b6;
+}
+
+.Label span {
+  font-size: 14px;
+  padding: 1px;
+}
