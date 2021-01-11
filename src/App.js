@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Welcome from "./components/Pages/Welcome";
@@ -13,6 +13,9 @@ import SignUp from "./components/SignUp/SignUp";
 const App = () => {
   console.log("APP_RENDER");
   const dispatch = useDispatch();
+  const userData = useSelector((state) => {
+    return state.auth;
+  });
 
   useEffect(() => {
     dispatch(replace("/"));
@@ -21,14 +24,20 @@ const App = () => {
   return (
     <>
       <div>
-        <Layout>
+        <Layout userData={userData}>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
             <Route path="/intro" component={Intro} />
             <Route path="/overview" render={() => <OverView />} />
-            <Route path="/community" component={Community} />
+            <Route
+              path="/community"
+              render={() => <Community userData={userData} />}
+            />
             <Route path="/notice" component={Notice} />
-            <Route path="/signUp" component={SignUp} />
+            <Route
+              path="/signUp"
+              render={() => <SignUp userData={userData} />}
+            />
           </Switch>
         </Layout>
       </div>

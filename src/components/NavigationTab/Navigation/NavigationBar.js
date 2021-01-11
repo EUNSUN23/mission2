@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./NavigationBar.module.css";
 
-const NavigationBar = ({ isAuth }) => {
+const NavigationBar = ({ userData }) => {
   return (
     <div className={styles.NavigationBar}>
       <NavLink
@@ -10,7 +10,7 @@ const NavigationBar = ({ isAuth }) => {
         activeClassName={styles.Active}
         to="/signUp"
       >
-        {isAuth ? "로그아웃" : "회원가입"}
+        {userData.idToken !== null ? "로그아웃" : "회원가입"}
       </NavLink>
     </div>
   );
