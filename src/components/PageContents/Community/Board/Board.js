@@ -3,8 +3,13 @@ import BoardItem from "./BoardItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addBoard, deleteBoard } from "../../../../store/actions/board";
 import styles from "./Board.module.css";
+import useInput from "../../../../hooks/useInput";
+import useIsValid from "../../../../hooks/useIsValid";
 
 const Board = () => {
+  const [text, setText] = useInput("");
+  const [submit, setSubmit] = useIsValid("");
+
   const boardData = useSelector((state) => {
     return state.reducer.data;
   });
@@ -31,6 +36,18 @@ const Board = () => {
 
   return (
     <>
+      <form>
+        <textarea value={text} onChange={setText}></textarea>
+        <button
+          type="submit"
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSubmit(text);
+          }}
+        >
+          글쓰기
+        </button>
+      </form>
       <div className={styles.board}>
         <span>no</span>
         <span>date</span>

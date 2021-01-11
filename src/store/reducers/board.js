@@ -22,13 +22,12 @@ const board = {
 };
 
 const deleteBoard = (state, key) => {
-  const board = { ...state };
-  const deletedBoard = board.data.filter((data) => {
+  const deletedBoard = state.data.filter((data) => {
+    console.log(data.no, key);
     return data.no !== key;
   });
-  board.data = deletedBoard;
-  console.log(deletedBoard);
-  return { ...state, ...board };
+  state.data = deletedBoard;
+  return state;
 };
 
 const addBoard = (state, board) => {
@@ -39,7 +38,7 @@ const addBoard = (state, board) => {
 const reducer = (state = board, action) => {
   switch (action.type) {
     case "DELETE":
-      return deleteBoard(state, action.key);
+      return deleteBoard(state, action.brdKey);
     case "ADD":
       return addBoard(state, action.board);
     default:
