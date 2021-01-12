@@ -1,13 +1,19 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import styles from "./SelfIntroduction.module.css";
+import { debounce } from "lodash";
+import { useDispatch } from "react-redux";
+import { setSelfIntro } from "../../../../store/actions/signUp";
+import useSelfIntro from "../../../../hooks/signUp/useSelfIntro";
 
-const selfIntroduction = memo((props) => {
-  const onChange = (value) => {
-    props.onChange(value);
-  };
+const selfIntroduction = memo(() => {
+  const [text, setText] = useSelfIntro([]);
+  const dispatch = useDispatch();
 
-  const rows = "6";
-  const cols = "50";
+  useEffect(() => {
+    debounce(() => {
+      dispatch(setSelfIntro(text));
+    }, 500);
+  }, [text]);
 
   return (
     <>
@@ -15,16 +21,14 @@ const selfIntroduction = memo((props) => {
         <textarea
           className={styles.Textarea}
           id="selfIntroduction"
-          name="slefIntroduction"
-          rows={rows}
-          cols={cols}
-          value={props.value}
-          onChange={(e) => {
-            onChange(e.target.value);
-          }}
+          name="selfIntroduction"
+          rows="6"
+          cols="50"
+          value={text.contents}
+          onChange={setText}
         />
         <div className={styles.LetterCounter}>
-          <span>{props.charLength}</span>/{rows * cols}
+          <span>{text.length}</span>/{6 * 50}
         </div>
       </div>
     </>

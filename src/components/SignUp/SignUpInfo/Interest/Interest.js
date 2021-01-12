@@ -1,76 +1,59 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import styles from "./Interest.module.css";
+import { useDispatch } from "react-redux";
+import { setInterest } from "../../../../store/actions/signUp";
 
-const option = [
-  //ref로 렌더링막아주기
-  ["영화", "movie"],
-  ["연애", "love"],
-  ["여행", "trip"],
-];
+const Interest = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
 
-class Interest extends PureComponent {
-  state = {
-    checkedInterest: [],
-  };
+  useEffect(() => {
+    const checkedInterest = Object.keys(isChecked).filter((key) => {
+      return isChecked[key];
+    });
+    dispatch(setInterest(checkedInterest));
+  }, [interest]);
 
-  componentDidUpdate = () => {
-    const checkedInterest = { ...this.state.checkedInterest };
-    this.props.onChange(checkedInterest);
-  };
-
-  onChangeHandler = (identifier, value, isCheck) => {
-    console.log(identifier);
-    console.log(value);
-    console.log(isCheck);
-
-    if (isCheck) {
-      this.setState(
-        (prevState) => {
-          return { checkedInterest: prevState.checkedInterest.concat(value) };
-        },
-        () => {
-          console.log(this.state.checkedInterest);
-        }
-      );
-    } else {
-      this.setState(
-        (prevState) => {
-          return {
-            checkedInterest: prevState.checkedInterest.filter((item) => {
-              return item !== value;
-            }),
-          };
-        },
-        () => {
-          console.log(this.state.checkedInterest);
-        }
-      );
-    }
-  };
-
-  render() {
-    return (
-      <div className={styles.Wrapper}>
-        {option.map((el, index) => {
-          return (
-            <div className={styles.Interest} key={el[1]}>
-              <label className={styles.Label} htmlFor={el[1]}>
-                <span>{el[0]}</span>
-              </label>
-              <input
-                name="interest"
-                type="checkbox"
-                value={el[1]}
-                onChange={(e) => {
-                  this.onChangeHandler(el[1], e.target.value, e.target.checked);
-                }}
-              />
-            </div>
-          );
-        })}
+  return (
+    <div className={styles.Wrapper}>
+      <div className={styles.Interest}>
+        <label htmlFor="romance">
+          <span>연애</span>
+        </label>
+        <input
+          name="romance"
+          id="romance"
+          type="checkbox"
+          value="romance"
+          onChange={setIsChecked}
+        />
       </div>
-    );
-  }
-}
+      <div className={styles.Interest}>
+        <label htmlFor="trip">
+          <span>여행</span>
+        </label>
+        <input
+          name="trip"
+          id="trip"
+          type="checkbox"
+          value="trip"
+          onChange={setIsChecked}
+        />
+      </div>
+      <div className={styles.Interest}>
+        <label htmlFor="movie">
+          <span>영화</span>
+        </label>
+        <input
+          name="movie"
+          id="movie"
+          type="checkbox"
+          value="movie"
+          onChange={setIsChecked}
+        />
+      </div>
+    </div>
+  );
+};
 
-export default Interest;
+export default React.memo(Interest);

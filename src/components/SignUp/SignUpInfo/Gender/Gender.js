@@ -1,11 +1,11 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Gender.module.css";
+import { setGender } from "../../../../store/actions/actionTypes";
 
-const gender = memo((props) => {
-  const onChangeHandler = (value) => {
-    props.onChange(value);
-  };
-  console.log(props.value);
+const gender = memo(() => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className={styles.Wrapper}>
@@ -16,11 +16,9 @@ const gender = memo((props) => {
           <input
             id="male"
             type="radio"
+            required
             value="male"
-            checked={props.value === "male"}
-            onChange={(e) => {
-              onChangeHandler(e.target.value);
-            }}
+            onChange={({ target: { value } }) => dispatch(setGender(value))}
           />
         </div>
         <div className={styles.Female}>
@@ -31,10 +29,7 @@ const gender = memo((props) => {
             id="female"
             type="radio"
             value="female"
-            checked={props.value === "female"}
-            onChange={(e) => {
-              onChangeHandler(e.target.value);
-            }}
+            onChange={({ target: { value } }) => dispatch(setGender(value))}
           />
         </div>
       </div>

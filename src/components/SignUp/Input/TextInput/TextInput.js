@@ -1,57 +1,59 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Modal from "../../Modal/Modal";
-
+import useIdPw from "../../../../hooks/signUp/useIdPw";
 import styles from "./TextInput.module.css";
+import { useDispatch } from "react-redux";
+import { setIdPw } from "../../../../store/actions/signUp";
+import { debounce } from "lodash";
 
 const TextInput = memo((props) => {
-  const inputElement = [];
+  const [inputValue, setInputValue] = useIdPw("");
+  //비밀번호 : 8자리~12자리 특수기호 적어도1개+영문대소문자+숫자
 
-  const idCheckHandler = (event) => {
-    props.onIdChecker(event);
-  };
+  const dispatch = useDispatch();
 
-  Object.keys(props.config).map((inputKey, idx) => {
-    let borderCss = "#b6b6b6";
-    if (props.config[inputKey].type) {
-      if (props.config[inputKey].border) {
-        borderCss = props.config[inputKey].border;
-      }
-      inputElement.push({
-        id: inputKey,
-        el: props.config[inputKey],
-        name: props.config[inputKey].name[1],
-        border: borderCss,
-      });
-    }
-  });
+  useEffect(() => {
+    debounce(() => {
+      dispatch(setIdPw(inputValue));
+    }, 500);
+  }, [inputValue]);
 
   return (
     <div className={styles.Wrapper}>
-      {inputElement.map((inputEl, i) => {
-        return (
-          <div key={inputEl.id} className={styles.Input}>
-            <label htmlFor={inputEl.id} className={styles.Label}>
-              <span>{inputEl.name}</span>:{" "}
-            </label>
-            <input
-              style={{ border: `1px solid ${inputEl.border}` }}
-              id={inputEl.id}
-              type={inputEl.el.type}
-              value={inputEl.el.value}
-              title={inputEl.el.title}
-              onChange={(e) => {
-                console.log(inputEl.isPattern);
-                props.onChange(e.target.value, inputEl.id);
-              }}
-            />
-          </div>
-        );
-      })}
+      <div className={styles.Input}>
+        <label htmlFor="id" className={styles.Label}>
+          <span>아이디</span>:{" "}
+        </label>
+        <input
+          id="id"
+          type="email"
+          name="email"
+          value={inputValue.email}
+          pattern="[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+"
+          size="30"
+          required
+          onChange={setInputValue}
+        />
+      </div>
+      <div className={styles.Input}>
+        <label htmlFor="id" className={styles.Label}>
+          <span>비밀번호</span>:{" "}
+        </label>
+        <input
+          id="pw"
+          type="password"
+          name="password"
+          value={inputValue.password}
+          pattern="(?=.*[a-z])(?=.*[0-9])(?=.*[,~!@#$%^&*])[.a-zA-Z0-9,~!@#$%^&]{7,13}"
+          size="30"
+          required
+          onChange={setInputValue}
+        />
+      </div>
       <button
-        onClick={(event) => {
-          idCheckHandler(event);
+        onClick={() => {
+          idPwCheck();
         }}
-        disabled={props.isChecked}
       >
         ID 중복체크
       </button>

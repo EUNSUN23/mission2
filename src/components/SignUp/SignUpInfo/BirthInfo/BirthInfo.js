@@ -8,6 +8,12 @@ const birthInfo = memo((props) => {
     props.onChangeBirth(value, type);
   };
 
+  // check: {
+  //   isLeapYear: false,
+  //   dateRange: 31,
+  // },
+  // isRequired: "",
+
   let selectBox = [];
 
   for (let key in props.config) {

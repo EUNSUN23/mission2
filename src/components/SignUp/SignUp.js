@@ -19,68 +19,6 @@ import styles from "./SignUp.module.css";
 import axios from "axios";
 
 class SignUpForm extends Component {
-  state = {
-    textInput: {
-      id: {
-        name: ["id", "아이디"],
-        value: "",
-        type: "text",
-        title:
-          "영문(소문자), 숫자, 특수문자 각각 1개 이상을 포함한 10자리 이상의 아이디",
-        isPassed: false,
-        border: "",
-        isChecked: false,
-        isrequired: false,
-      },
-      pw: {
-        name: ["pw", "비밀번호"],
-        value: "",
-        type: "password",
-        title:
-          "영문(소문자), 숫자 각각 1개 이상, 특수문자 2개 이상을 포함한 12자리 이상의 비밀번호",
-        isPassed: false,
-        border: "",
-        isrequired: false,
-      },
-      pwCheck: {
-        name: ["pwCheck", "비밀번호 재입력"],
-        value: "",
-        type: "password",
-        title: "",
-        isPassed: false,
-        pwCheck: false,
-        border: "",
-        isrequired: false,
-      },
-      isRequired: "",
-    },
-    gender: {
-      value: "",
-      isRequired: "",
-    },
-    birthInfo: {
-      year: "",
-      month: "",
-      date: "",
-      check: {
-        isLeapYear: false,
-        dateRange: 31,
-      },
-      isRequired: "",
-    },
-    interest: {
-      value: [],
-      isRequired: "",
-    },
-    selfIntroduction: {
-      value: [],
-      valueLength: 0,
-      isRequired: "",
-    },
-    modal: false,
-    modalMessage: [],
-  };
-
   onClickModal = () => {
     this.setState({ modal: false });
   };
@@ -104,55 +42,6 @@ class SignUpForm extends Component {
     updatedBirthInfo.isRequired = checkRequires(requireArr);
 
     this.setState({ birthInfo: updatedBirthInfo });
-  };
-
-  onIdPwHandler = (value, inputIdentifier) => {
-    const upDatedTextInfo = { ...this.state.textInput };
-    const upDatedInput = { ...upDatedTextInfo[inputIdentifier] };
-    upDatedInput.value = value;
-    console.log(upDatedInput.value);
-    if (upDatedInput.value !== "") {
-      upDatedInput.isrequired = true;
-    } else {
-      upDatedInput.isrequired = false;
-    }
-    isRequire(upDatedInput, upDatedInput.value);
-    console.log(upDatedInput);
-    borderPaint(
-      upDatedTextInfo,
-      upDatedInput,
-      inputIdentifier,
-      upDatedInput.value
-    );
-    upDatedTextInfo[inputIdentifier] = upDatedInput;
-    this.setState({ textInput: upDatedTextInfo });
-  };
-
-  onGenderHandler = (optionValue) => {
-    const upDatedGenderInfo = { ...this.state.gender };
-    upDatedGenderInfo.value = optionValue;
-    isRequire(upDatedGenderInfo, optionValue);
-    this.setState({ gender: upDatedGenderInfo });
-  };
-
-  onInterestHandler = (checkedInterest) => {
-    const updatedInterest = { ...this.state.interest };
-    const interest = [...this.state.interest.value];
-    interest.pop();
-    updatedInterest.value = interest.concat(checkedInterest);
-    isRequire(updatedInterest, updatedInterest.value);
-    this.setState({ interest: updatedInterest });
-  };
-
-  onSelfIntroHandler = (optionValue) => {
-    const updatedSelfIntroduction = { ...this.state.selfIntroduction };
-    updatedSelfIntroduction.value = countAndCutLetter(optionValue, 0, 300);
-    updatedSelfIntroduction.valueLength =
-      updatedSelfIntroduction.value[0].length;
-    this.setState({
-      selfIntroduction: updatedSelfIntroduction,
-    });
-    isRequire(updatedSelfIntroduction, updatedSelfIntroduction.value);
   };
 
   onIDChecker = (id, event) => {
@@ -268,16 +157,7 @@ class SignUpForm extends Component {
           />
           <h2>{`<회원 가입>`}</h2>
           <h4>-아이디, 비밀번호-</h4>
-          <TextInput
-            onChange={this.onIdPwHandler}
-            config={this.state.textInput}
-            onIdChecker={(event) => {
-              this.onIDChecker(this.state.textInput.id.value, event);
-            }}
-            checkingMs={this.state.idCheckedMs}
-            modalClosed={this.onClickModal}
-            modalShow={this.state.idCheckModal}
-          />
+          <TextInput />
           <h4>-성별-</h4>
           <Gender
             onChange={this.onGenderHandler}
