@@ -23,27 +23,6 @@ class SignUpForm extends Component {
     this.setState({ modal: false });
   };
 
-  onBirthHandler = (value, type) => {
-    const updatedBirthInfo = { ...this.state.birthInfo };
-    updatedBirthInfo[type] = value;
-    const updatedCheckInfo = { ...updatedBirthInfo.check };
-    const requireArr = [
-      updatedBirthInfo.year,
-      updatedBirthInfo.month,
-      updatedBirthInfo.date,
-    ];
-
-    updatedCheckInfo.isLeapYear = checkLeapYear(updatedBirthInfo.year);
-    updatedCheckInfo.dateRange = birthOptionChange(
-      updatedCheckInfo.isLeapYear,
-      updatedBirthInfo.month
-    );
-    updatedBirthInfo.check = updatedCheckInfo;
-    updatedBirthInfo.isRequired = checkRequires(requireArr);
-
-    this.setState({ birthInfo: updatedBirthInfo });
-  };
-
   onIDChecker = (id, event) => {
     event.preventDefault();
     const updatedTextInput = { ...this.state.textInput };
