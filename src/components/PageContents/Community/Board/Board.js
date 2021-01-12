@@ -3,8 +3,8 @@ import BoardItem from "./BoardItem";
 import { useSelector, useDispatch } from "react-redux";
 import { addBoard, deleteBoard } from "../../../../store/actions/board";
 import styles from "./Board.module.css";
-import useInput from "../../../../hooks/useInput";
-import useAddData from "../../../../hooks/useAddData";
+import useInput from "../../../../hooks/community/useInput";
+import useAddData from "../../../../hooks/community/useAddData";
 
 const Board = () => {
   const [text, setText] = useInput("");

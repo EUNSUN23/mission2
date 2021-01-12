@@ -18,7 +18,7 @@ import {
 import styles from "./SignUp.module.css";
 import axios from "axios";
 
-class SignUp extends Component {
+class SignUpForm extends Component {
   state = {
     textInput: {
       id: {
@@ -306,4 +306,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default SignUpForm;

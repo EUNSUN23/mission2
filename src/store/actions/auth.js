@@ -52,14 +52,11 @@ export const auth = (email, password) => {
       password: password,
       returnSecureToken: true,
     };
-    /*회원가입: (구글검색)firebase auth rest api > API KEY 부분에 
-        내 firebase 설정>프로젝트설정>일반 에서 API KEY 복사해서 붙이면 됨. */
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAsK7GUA9nWSoGbqgRDJegJeosrHp4yiII";
 
     // if (!isSignup) {
-    //   /*로그인: (구글검색)firebase api reference > REST > authentication & user management >
-    // Sign in with email / password 섹션의 endpoint*/
+    //   /*로그인*/
     //   url =
     //     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBepqx1s3T66CIUQd4MOChfSUqKx1S0r6A";
     // }
@@ -69,12 +66,6 @@ export const auth = (email, password) => {
         const expirationDate = new Date(
           new Date().getTime() + response.data.expiresIn * 1000
         );
-        //토큰 받은 당시 시간 + 토큰 유효 시간
-        /*response.data)
-          expiresIn : token이 valid한 기간(초단위). 이 시간이 지나면 다시 로그인 해야함. 
-          idToken : 토큰
-          refreshToken : 새로운 idToken 받을 수 있는 token.   
-          */
         localStorage.setItem("token", response.data.idToken);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data.localId);
@@ -102,9 +93,6 @@ export const authCheckState = () => {
       dispatch(logout());
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
-      //what we retrieve from the localStorage is string, but with new Date(),
-      //we can covert it into a date object.
-
       if (expirationDate > new Date()) {
         const userId = localStorage.getItem("userId");
         dispatch(authSuccess(token, userId));
@@ -113,8 +101,6 @@ export const authCheckState = () => {
             (expirationDate.getTime() - new Date().getTime()) / 1000
           )
         );
-        //Of course we could also simply store it(token) in localStorage and that wouldn't be wrong.
-        //but you can however also send the request to the firebase auth API to get from there. (여기서는 그냥 local에 저장하는게 더 simple)
       } else {
         dispatch(logout());
       }
