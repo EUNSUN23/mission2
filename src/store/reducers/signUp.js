@@ -7,15 +7,10 @@ const signUp = {
       pw: "",
     },
     gender: "",
-    birthInfo: {
-      year: "",
-      month: "",
-      date: "",
-    },
+    birthInfo: "",
     interest: [],
     selfIntroduction: "",
   },
-
   modal: false,
   modalMessage: [],
 };
@@ -51,6 +46,11 @@ const setSelfIntro = (state, text) => {
   return updateState(state, updateObject(state.form, updatedSelfIntro));
 };
 
+const setBirth = (state, birthInfo) => {
+  const updatedBirth = { birthInfo: birthInfo };
+  return updateState(state, updateObject(state.form, updatedBirth));
+};
+
 const reducer = (state = signUp, action) => {
   switch (action.type) {
     case actionTypes.SET_ID:
@@ -63,6 +63,8 @@ const reducer = (state = signUp, action) => {
       return setInterest(state, action.interest);
     case actionTypes.SET_SELF_INTRO:
       return setSelfIntro(state, action.text);
+    case actionTypes.SET_BIRTH:
+      return setBirth(state, action.birthInfo);
     default:
       return state;
   }

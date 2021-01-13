@@ -34,3 +34,11 @@ export const setSelfIntro = (text) => {
     text: text,
   };
 };
+
+export const setBirth = (year, month, date) => {
+  const birthInfo = `${year}/${month}/${date}`;
+  return {
+    type: actionTypes.SET_BIRTH,
+    birthInfo: birthInfo,
+  };
+};

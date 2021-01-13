@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Interest.module.css";
 import { useDispatch } from "react-redux";
 import { setInterest } from "../../../../store/actions/signUp";
+import useInterest from "../../../../hooks/signUp/useInterest";
 
 const Interest = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useInterest(false);
   const dispatch = useDispatch();
+  const ref = {
+    romance: useRef(false),
+    trip: useRef(false),
+    movie: useRef(false),
+  };
 
   useEffect(() => {
     const checkedInterest = Object.keys(isChecked).filter((key) => {
       return isChecked[key];
     });
-    dispatch(setInterest(checkedInterest));
-  }, [interest]);
+
+    console.log(checkedInterest);
+
+    let uncheckedItem;
+    if (checkedInterest.length === 2) {
+      for (const key in isChecked) {
+        if (!isChecked[key]) {
+          uncheckedItem = key;
+          console.log(key);
+          ref[uncheckedItem].current = true;
+          dispatch(setInterest(checkedInterest));
+        }
+      }
+    } else {
+      ref.romance.current = false;
+      ref.trip.current = false;
+      ref.movie.current = false;
+    }
+  });
 
   return (
     <div className={styles.Wrapper}>
@@ -25,6 +48,7 @@ const Interest = () => {
           id="romance"
           type="checkbox"
           value="romance"
+          disabled={ref.romance.current}
           onChange={setIsChecked}
         />
       </div>
@@ -37,6 +61,7 @@ const Interest = () => {
           id="trip"
           type="checkbox"
           value="trip"
+          disabled={ref.trip.current}
           onChange={setIsChecked}
         />
       </div>
@@ -49,6 +74,7 @@ const Interest = () => {
           id="movie"
           type="checkbox"
           value="movie"
+          disabled={ref.movie.current}
           onChange={setIsChecked}
         />
       </div>
@@ -56,4 +82,4 @@ const Interest = () => {
   );
 };
 
-export default React.memo(Interest);
+export default Interest;

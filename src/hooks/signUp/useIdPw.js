@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const useIdPw = (initValue) => {
   const [email, setEmail] = useState(initValue);
   const [password, setPassword] = useState(initValue);
 
-  console.log(inputValue);
+  console.log(email, password);
 
   const onIdPwInputHandler = (e) => {
     const { name, value } = e.target;

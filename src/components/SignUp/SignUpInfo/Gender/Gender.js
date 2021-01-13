@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Gender.module.css";
-import { setGender } from "../../../../store/actions/actionTypes";
+import { setGender } from "../../../../store/actions/signUp";
 
 const gender = memo(() => {
   const dispatch = useDispatch();
