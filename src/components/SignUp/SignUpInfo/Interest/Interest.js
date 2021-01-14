@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Interest.module.css";
 import { useDispatch } from "react-redux";
 import { setInterest } from "../../../../store/actions/signUp";

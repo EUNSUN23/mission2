@@ -1,4 +1,4 @@
-import { useState, useCallback, memo, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const useInterest = (initValue) => {
   const [romance, setRomance] = useState(initValue);

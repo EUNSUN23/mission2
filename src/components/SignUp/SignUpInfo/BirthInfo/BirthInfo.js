@@ -1,21 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./BirthInfo.module.css";
 import useBirth from "../../../../hooks/signUp/useBirth";
-import { useDispatch } from "react-redux";
-import { checkLeapYear } from "../../../../utils/InputHandler";
-import { setBirth } from "../../../../store/actions/signUp";
 
 const BirthInfo = () => {
   const [birthInfo, setBirthInfo] = useBirth();
-  const [isLeapYear, setIsLeapYear] = useState(false);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    birthInfo.year && setIsLeapYear(checkLeapYear(birthInfo.year));
-    if (birthInfo.year && birthInfo.month && birthInfo.date) {
-      dispatch(setBirth(birthInfo.year, birthInfo.month, birthInfo.date));
-    }
-  }, [birthInfo]);
 
   return (
     <>
@@ -26,10 +14,9 @@ const BirthInfo = () => {
             id="year"
             className={styles.Option}
             name="year"
-            onChange={(e) => {
-              setBirthInfo(e, isLeapYear);
-            }}
+            onChange={setBirthInfo}
           >
+            <option value={null}>--선택--</option>
             {Array(2019 - 1910)
               .fill()
               .map((el, idx) => {
@@ -56,10 +43,9 @@ const BirthInfo = () => {
             className={styles.Option}
             id="month"
             name="month"
-            onChange={(e) => {
-              setBirthInfo(e, isLeapYear);
-            }}
+            onChange={setBirthInfo}
           >
+            <option value="">--선택--</option>
             {Array(12)
               .fill()
               .map((el, idx) => {
@@ -82,10 +68,9 @@ const BirthInfo = () => {
             id="date"
             className={styles.Option}
             name="date"
-            onChange={(e) => {
-              setBirthInfo(e, isLeapYear);
-            }}
+            onChange={setBirthInfo}
           >
+            <option value="">--선택--</option>
             {Array(birthInfo.dateRange || 31)
               .fill()
               .map((el, idx) => {

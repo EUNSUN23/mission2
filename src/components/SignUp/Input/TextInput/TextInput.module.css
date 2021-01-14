@@ -17,3 +17,9 @@
   font-size: 14px;
   padding: 1px;
 }
+
+.Input button {
+  position: absolute;
+  top: 8px;
+  right: 30px;
+}

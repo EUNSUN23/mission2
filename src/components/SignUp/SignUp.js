@@ -6,9 +6,8 @@ import Interest from "./SignUpInfo/Interest/Interest";
 import SelfIntroduction from "./SignUpInfo/SelfIntroduction/SelfIntroduction";
 import Button from "./Button/Button";
 import Modal from "./Modal/Modal";
-import { checkRequires, isformValid } from "../../utils/InputHandler";
+import { checkRequires, isformValid } from "../../utils/signUp";
 import styles from "./SignUp.module.css";
-import axios from "axios";
 
 const SignUpForm = () => {
   const onCanceledHandler = (e) => {
@@ -35,9 +34,9 @@ const SignUpForm = () => {
         <Interest />
         <h4>-자기소개-</h4>
         <SelfIntroduction />
-        <button onClick={(e) => onCanceledHandler(e)}>가입취소</button>
+        <button onClick={(e) => onCanceledHandler(e)}>취소</button>
         <button onClick={(e) => onSubmittedHandler(e)} type="submit">
-          가입
+          가입하기
         </button>
       </form>
     </>
