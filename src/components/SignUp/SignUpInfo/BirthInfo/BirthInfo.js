@@ -12,11 +12,10 @@ const BirthInfo = () => {
 
   useEffect(() => {
     birthInfo.year && setIsLeapYear(checkLeapYear(birthInfo.year));
+    if (birthInfo.year && birthInfo.month && birthInfo.date) {
+      dispatch(setBirth(birthInfo.year, birthInfo.month, birthInfo.date));
+    }
   }, [birthInfo]);
-
-  if (birthInfo.year && birthInfo.month && birthInfo.date) {
-    dispatch(setBirth(birthInfo.year, birthInfo.month, birthInfo.date));
-  }
 
   return (
     <>

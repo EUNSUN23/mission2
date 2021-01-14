@@ -13,14 +13,16 @@ const UseBirth = () => {
       switch (name) {
         case "year":
           setYear(value);
+          break;
         case "month":
           if (isLeapYear) {
-            setMonth(value);
             setDateRange(birthOptionChange(isLeapYear, value));
           }
-
+          setMonth(value);
+          break;
         case "date":
           setDate(value);
+          break;
       }
     },
     [year, month, date, dateRange]

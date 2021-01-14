@@ -15,6 +15,7 @@ const gender = memo(() => {
           </label>
           <input
             id="male"
+            name="gender"
             type="radio"
             required
             value="male"
@@ -27,6 +28,7 @@ const gender = memo(() => {
           </label>
           <input
             id="female"
+            name="gender"
             type="radio"
             value="female"
             onChange={({ target: { value } }) => dispatch(setGender(value))}

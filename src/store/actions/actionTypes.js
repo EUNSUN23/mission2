@@ -3,7 +3,7 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const AUTH_START = "AUTH_START";
 
-export const SET_ID = "SET_IDPW";
+export const SET_ID = "SET_ID";
 export const SET_PW = "SET_PW";
 export const SET_INTEREST = "SET_INTEREST";
 export const SET_GENDER = "SET_GENDER";

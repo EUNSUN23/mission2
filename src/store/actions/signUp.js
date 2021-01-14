@@ -1,16 +1,17 @@
 import * as actionTypes from "../actions/actionTypes";
 
-export const setIdPw = (inputValue) => {
-  if (inputValue.id) {
-    return {
-      type: actionTypes.SET_ID,
-      id: inputValue.id,
-    };
-  } else {
-    return {
-      type: actionTypes.SET_PW,
-      pw: inputValue.pw,
-    };
+export const setIdPw = (name, inputValue) => {
+  switch (name) {
+    case "email":
+      return {
+        type: actionTypes.SET_ID,
+        email: inputValue,
+      };
+    case "password":
+      return {
+        type: actionTypes.SET_PW,
+        password: inputValue,
+      };
   }
 };
 

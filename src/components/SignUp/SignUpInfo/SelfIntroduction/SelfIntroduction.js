@@ -1,19 +1,10 @@
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import styles from "./SelfIntroduction.module.css";
-import { debounce } from "lodash";
-import { useDispatch } from "react-redux";
-import { setSelfIntro } from "../../../../store/actions/signUp";
+
 import useSelfIntro from "../../../../hooks/signUp/useSelfIntro";
 
 const selfIntroduction = memo(() => {
   const [text, setText] = useSelfIntro([]);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    debounce(() => {
-      dispatch(setSelfIntro(text));
-    }, 500);
-  }, [text]);
 
   return (
     <>

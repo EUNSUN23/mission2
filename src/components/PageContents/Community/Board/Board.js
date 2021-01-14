@@ -12,7 +12,7 @@ const Board = () => {
   const setNewData = useAddData();
 
   const boardData = useSelector((state) => {
-    return state.reducer.data;
+    return state.board.data;
   });
 
   const dispatch = useDispatch();

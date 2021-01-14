@@ -3,8 +3,8 @@ import * as actionTypes from "../../store/actions/actionTypes";
 const signUp = {
   form: {
     IdPw: {
-      id: "",
-      pw: "",
+      email: "",
+      password: "",
     },
     gender: "",
     birthInfo: "",
@@ -20,46 +20,49 @@ const updateObj = (oldObj, updatedObj) => {
   return updatedState;
 };
 
-const updateState = (initState, updatedObj) => {
-  const updatedForm = { ...initState, ...updatedObj };
-  return updatedForm;
+const updateState = (initState, updatedState) => {
+  return { ...initState, updatedState };
 };
 
-const setIdPw = (state, idPw) => {
-  const updatedIdPw = { ...state.form.IdPw };
-  updatedIdPw[idPw] = action[idPw];
-  return updateState(state, updateObj(state.form, updatedIdPw));
+const setIdPw = (state, name, idPw) => {
+  const initIdPwState = { ...state };
+  initIdPwState.form.IdPw[name] = idPw;
+  return { ...state, ...initIdPwState };
 };
 
 const setInterest = (state, interest) => {
-  const updatedInterest = { interest: interest };
-  return updateState(state, updateObj(state.form, updatedInterest));
+  const initInterestState = { ...state };
+  initInterestState.form.interest = interest;
+  return { ...state, ...initInterestState };
 };
 
 const setGender = (state, gender) => {
-  const updatedGender = { gender: gender };
-  return updateState(state, updateObj(state.form, updatedGender));
+  const initGenderState = { ...state };
+  initGenderState.form.gender = gender;
+  return { ...state, ...initGenderState };
 };
 
-const setSelfIntro = (state, text) => {
-  const updatedSelfIntro = { selfIntroduction: text };
-  return updateState(state, updateObject(state.form, updatedSelfIntro));
+const setSelfIntro = (state, selfIntroduction) => {
+  const initSelfIntroState = { ...state };
+  initSelfIntroState.form.selfIntroduction = selfIntroduction;
+  return { ...state, ...initSelfIntroState };
 };
 
 const setBirth = (state, birthInfo) => {
-  const updatedBirth = { birthInfo: birthInfo };
-  return updateState(state, updateObject(state.form, updatedBirth));
+  const initBirthState = { ...state };
+  initBirthState.form.birthInfo = birthInfo;
+  return { ...state, ...initBirthState };
 };
 
 const reducer = (state = signUp, action) => {
   switch (action.type) {
     case actionTypes.SET_ID:
-      return setIdPw(state, action.id);
+      return setIdPw(state, "email", action.email);
     case actionTypes.SET_PW:
-      return setIdPw(state, action.pw);
+      return setIdPw(state, "password", action.password);
     case actionTypes.SET_GENDER:
       return setGender(state, action.gender);
-    case actionTypes.SET_Interest:
+    case actionTypes.SET_INTEREST:
       return setInterest(state, action.interest);
     case actionTypes.SET_SELF_INTRO:
       return setSelfIntro(state, action.text);

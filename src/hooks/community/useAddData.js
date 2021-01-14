@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useIsValid = () => {
   const number = useSelector((state) => {
-    return state.reducer.data.length;
+    return state.board.data.length;
   });
   const dispatch = useDispatch();
 

@@ -27,7 +27,6 @@ const Interest = () => {
           uncheckedItem = key;
           console.log(key);
           ref[uncheckedItem].current = true;
-          dispatch(setInterest(checkedInterest));
         }
       }
     } else {
@@ -35,6 +34,7 @@ const Interest = () => {
       ref.trip.current = false;
       ref.movie.current = false;
     }
+    dispatch(setInterest(checkedInterest));
   });
 
   return (

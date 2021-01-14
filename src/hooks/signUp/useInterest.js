@@ -1,6 +1,6 @@
 import { useState, useCallback, memo, useEffect } from "react";
 
-const UseInterest = (initValue) => {
+const useInterest = (initValue) => {
   const [romance, setRomance] = useState(initValue);
   const [trip, setTrip] = useState(initValue);
   const [movie, setMovie] = useState(initValue);
@@ -43,4 +43,4 @@ const UseInterest = (initValue) => {
   return [{ romance: romance, trip: trip, movie: movie }, onInterestHandler];
 };
 
-export default UseInterest;
+export default useInterest;
