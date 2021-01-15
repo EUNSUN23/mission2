@@ -13,6 +13,10 @@
   border: 1px solid #b6b6b6;
 }
 
+.Input input:valid {
+  border: 2px solid skyblue;
+}
+
 .Label span {
   font-size: 14px;
   padding: 1px;

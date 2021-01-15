@@ -8,7 +8,7 @@ const Layout = memo((props) => {
   return (
     <>
       <div className={styles.Layout}>
-        <NavigationBar userData={props.userData} />
+        <NavigationBar isAuth={props.isAuth} />
         <Header />
         <MenuBar />
         {props.children}

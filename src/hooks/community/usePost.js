@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { addBoard } from "../../store/actions/board";
 import { useDispatch, useSelector } from "react-redux";
 
-const useIsValid = () => {
+const usePost = () => {
   const number = useSelector((state) => {
     return state.board.data.length;
   });
@@ -25,4 +25,4 @@ const useIsValid = () => {
   return validation;
 };
 
-export default useIsValid;
+export default usePost;

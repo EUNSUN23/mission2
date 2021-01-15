@@ -8,16 +8,56 @@ import Button from "./Button/Button";
 import Modal from "./Modal/Modal";
 import { checkRequires, isformValid } from "../../utils/signUp";
 import styles from "./SignUp.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { firebaseAuth } from "../../firebase";
+import { firestore } from "../../firebase";
+import { replace } from "react-router-redux";
+import { ErrorRounded } from "@material-ui/icons";
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const signupData = useSelector((state) => {
+    return state.signUp.form;
+  });
+
   const onCanceledHandler = (e) => {
     e.preventDefault();
     console.log("CANCEL SUBMIT");
   };
 
-  const onSubmittedHandler = (e) => {
+  const onSubmittedHandler = async (e) => {
     e.preventDefault();
-    console.log("SUBMIT SIGNUP");
+    try {
+      const cred = await firebaseAuth.createUserWithEmailAndPassword(
+        signupData.IdPw.email,
+        signupData.IdPw.password
+      );
+
+      firestore
+        .collection("users")
+        .doc(cred.user.uid)
+        .set(
+          {
+            bio: {
+              email: signupData.IdPw.email,
+              selfIntroduction: signupData.selfIntroduction,
+            },
+          },
+          (err) => console.log(err)
+        );
+
+      console.log("success");
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      firebaseAuth.currentUser.sendEmailVerification();
+      console.log("email sent");
+      dispatch(replace("/"));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

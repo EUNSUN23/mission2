@@ -1,17 +1,22 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/actions/auth";
+import { replace } from "react-router-redux";
 import styles from "./NavigationBar.module.css";
 
-const NavigationBar = ({ userData }) => {
+const NavigationBar = ({ isAuth }) => {
+  const dispatch = useDispatch();
+
+  const onClickAuth = () => {
+    isAuth ? dispatch(logout()) : dispatch(replace("/signup"));
+  };
+
   return (
     <div className={styles.NavigationBar}>
-      <NavLink
-        className={styles.inActive}
-        activeClassName={styles.Active}
-        to="/signUp"
-      >
-        {userData.idToken !== null ? "로그아웃" : "회원가입"}
-      </NavLink>
+      {isAuth ? <span className={styles.MyPage}>My Page</span> : null}
+      <span className={styles.SignIn} onClick={onClickAuth}>
+        {isAuth ? "로그아웃" : "로그인"}
+      </span>
     </div>
   );
 };
