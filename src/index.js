@@ -15,7 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Add the reducer to your store on the `routing` key
 
-export const history = createBrowserHistory();
+export const history = createBrowserHistory({ basename: "/" });
 
 const store = createStore(
   combineReducers({

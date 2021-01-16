@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { firebaseAuth } from "../../firebase";
 import { firestore } from "../../firebase";
 import { replace } from "react-router-redux";
-import { ErrorRounded } from "@material-ui/icons";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -52,7 +51,11 @@ const SignUpForm = () => {
     }
 
     try {
-      firebaseAuth.currentUser.sendEmailVerification();
+      const actionCodeSettings = {
+        url: "react-mission-caab8.web.app",
+        handleCodeInApp: false,
+      };
+      firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings);
       console.log("email sent");
       dispatch(replace("/"));
     } catch (err) {

@@ -1,5 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import { debounce } from "lodash";
+import { firebaseAuth } from "../../firebase";
 
 export const authStart = () => {
   //authenticate 시작하면 loading 메세지 띄우는 action creator.
