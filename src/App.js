@@ -9,6 +9,7 @@ import Community from "./components/Pages/Community/Community";
 import Intro from "./components/Pages/Intro/Intro";
 import Notice from "./components/Pages/Notice/Notice";
 import SignUp from "./components/SignUp/SignUp";
+import VerifyEmail from "./components/Pages/VerifyEmail/VerifyEmail";
 import { firestore, firebaseAuth } from "./firebase";
 import { authSuccess, authFail } from "./store/actions/auth";
 
@@ -33,8 +34,8 @@ const App = () => {
   return (
     <>
       <div>
-        <Layout isAuth={isAuth}>
-          <Switch>
+        <Switch>
+          <Layout isAuth={isAuth}>
             <Route exact path="/" render={() => <Welcome />} />
             <Route path="/intro" component={Intro} />
             <Route path="/overview" render={() => <OverView />} />
@@ -44,8 +45,9 @@ const App = () => {
             />
             <Route path="/notice" component={Notice} />
             <Route path="/signup" render={() => <SignUp isAuth={isAuth} />} />
-          </Switch>
-        </Layout>
+            <Route path="/verifyEmail" component={VerifyEmail} />
+          </Layout>
+        </Switch>
       </div>
     </>
   );

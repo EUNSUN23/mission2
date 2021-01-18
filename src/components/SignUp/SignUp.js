@@ -56,7 +56,7 @@ const SignUpForm = () => {
       }
 
       console.log("success");
-      dispatch(replace("/"));
+      dispatch(replace("/verifyEmail"));
     } catch (err) {
       console.log(err);
     }
