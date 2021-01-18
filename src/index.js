@@ -6,7 +6,6 @@ import { ConnectedRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import { applyMiddleware, compose, createStore, combineReducers } from "redux";
 import { routerMiddleware, connectRouter } from "connected-react-router";
-import "bootstrap/dist/css/bootstrap.css";
 import thunk from "redux-thunk";
 import reportWebVitals from "./reportWebVitals";
 import board from "./store/reducers/board";

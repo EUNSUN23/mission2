@@ -1,37 +1,60 @@
 import React from "react";
 import styles from "./VerifyEmail.module.css";
 import cx from "classnames";
+import globalStyles from "../../../Assets/global-styles/bootstrap.min.css";
 
 const VerifyEmail = () => {
   return (
     <div className={styles.Wrapper}>
-      <div className="cover-container d-flex text-center text-white bg-dark w-100 h-100 p-3 mx-auto flex-column">
+      <div
+        className={cx(
+          "cover-container d-flex text-center text-white bg-dark w-100 h-100 p-3 mx-auto flex-column"
+        )}
+      >
         <header className="mb-auto">
           <div>
-            <h3 className="float-md-start mb-0">Cover</h3>
-            <nav className="nav nav-masthead justify-content-center float-md-end">
-              <a className="nav-link" href="#">
-                Home
-              </a>
-              <a className="nav-link" href="#">
-                Contact
-              </a>
-            </nav>
+            <nav
+              className={cx(
+                "nav nav-masthead justify-content-center float-md-end"
+              )}
+            ></nav>
           </div>
         </header>
 
         <main className="px-3">
-          <h1>이메일 인증을 완료해 주세요</h1>
-          <p className="lead">
-            이메일 인증이 완료되지 않으면 회원가입처리가 되지 않습니다. <br />
-            아래 버튼을 클릭하여 이메일 인증을 완료해 주세요.
+          <br />
+          <p className={cx(styles.Lead, "lead")}>
+            입력하신 이메일 주소로 인증메일이 발송되었습니다.
+            <br />
+            이메일을 확인하시고 인증을 완료하세요.
+            <br />
+            <br />
+            <p className={styles.Warn}>
+              <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
+              이메일 인증 미완료시 회원가입이 되지 않습니다
+            </p>
           </p>
+          <br />
+          <br />
           <p className="lead">
             <a
-              href="#"
-              className="btn btn-lg btn-secondary fw-bold border-white bg-white text-dark"
+              className={cx(
+                "btn btn-lg btn-secondary fw-bold border-white bg-white",
+                styles.NavLink
+              )}
+              href="/"
             >
-              이메일 인증하기
+              <i className="fa fa-home" aria-hidden="true"></i> 홈으로 돌아가기
+            </a>
+            <a
+              className={cx(
+                "btn btn-lg btn-secondary fw-bold border-white bg-white",
+                styles.NavLink
+              )}
+              href="#"
+            >
+              <i className="fa fa-envelope-o" aria-hidden="true"></i> 인증메일
+              재발송
             </a>
           </p>
         </main>

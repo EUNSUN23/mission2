@@ -25,7 +25,7 @@ const App = () => {
   return (
     <>
       <div>
-        {/* <Layout userData={userData}>
+        <Layout userData={userData}>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
             <Route path="/intro" component={Intro} />
@@ -40,7 +40,7 @@ const App = () => {
               render={() => <SignUp userData={userData} />}
             />
           </Switch>
-        </Layout> */}
+        </Layout>
         <VerifyEmail />
       </div>
     </>

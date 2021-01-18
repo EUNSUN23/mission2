@@ -17,31 +17,41 @@
 }
 
 .Wrapper .cover-container {
+  display: flex;
+  width: 100;
+  height: 100;
+  padding: 3;
+  text-align: center;
+  flex-direction: column;
   max-width: 42em;
+  color: white;
+  font-weight: 800;
 }
 
 /*
  * Header
  */
 
-.Wrapper nav a {
-  padding: 0.25rem 0;
+.Wrapper .NavLink {
+  display: inline-block;
+  padding: 0.25rem 0.25rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.5);
+  color: #333;
+  border-bottom-color: rgba(255, 255, 255, 0.25);
   background-color: transparent;
   border-bottom: 0.25rem solid transparent;
 }
 
-.Wrapper nav a:hover,
-.Wrapper nav a:focus {
-  border-bottom-color: rgba(255, 255, 255, 0.25);
+.Wrapper .NavLink:hover,
+.Wrapper .NavLink:focus {
+  color: #777;
+  border-bottom: 0.25rem solid #fff;
 }
 
-.Wrapper nav a + a {
+.Wrapper .NavLink + .NavLink {
   margin-left: 1rem;
 }
 
-.Wrapper nav .active {
-  color: #fff;
-  border-bottom-color: #fff;
+.Warn {
+  font-size: 1.5rem;
 }
