@@ -27,12 +27,11 @@ const VerifyEmail = () => {
             입력하신 이메일 주소로 인증메일이 발송되었습니다.
             <br />
             이메일을 확인하시고 인증을 완료하세요.
-            <br />
-            <br />
-            <p className={styles.Warn}>
-              <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
-              이메일 인증 미완료시 회원가입이 되지 않습니다
-            </p>
+          </p>
+          <br />
+          <p className={styles.Warn}>
+            <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
+            이메일 인증 미완료시 회원가입이 되지 않습니다
           </p>
           <br />
           <br />
@@ -42,19 +41,10 @@ const VerifyEmail = () => {
                 "btn btn-lg btn-secondary fw-bold border-white bg-white",
                 styles.NavLink
               )}
-              href="/"
-            >
-              <i className="fa fa-home" aria-hidden="true"></i> 홈으로 돌아가기
-            </a>
-            <a
-              className={cx(
-                "btn btn-lg btn-secondary fw-bold border-white bg-white",
-                styles.NavLink
-              )}
               href="#"
             >
               <i className="fa fa-envelope-o" aria-hidden="true"></i> 인증메일
-              재발송
+              다시 보내기
             </a>
           </p>
         </main>
