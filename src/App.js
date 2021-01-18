@@ -18,19 +18,17 @@ const App = () => {
     return state.auth;
   });
 
-  const isAuth = useSelector((state) => state.auth.isAuth);
-
   console.log("APP_RENDER");
 
-  useEffect(() => {
-    firebaseAuth.onAuthStateChanged((user) => {
-      if (user) {
-        user.emailVerified ? dispatch(authSuccess()) : dispatch(authFail());
-      } else {
-        console.log("no users");
-      }
-    });
-  });
+  const urlParams = new URLSearchParams(window.location.search);
+  const mode = urlParams.get("mode");
+
+  if (mode === "verifyEmail") {
+    dispatch(authSuccess());
+    dispatch(replace("/"));
+  }
+
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   return (
     <>

@@ -44,19 +44,18 @@ const SignUpForm = () => {
           },
           (err) => console.log(err)
         );
+      try {
+        const actionCodeSettings = {
+          url: "https://react-mission-caab8.web.app",
+          handleCodeInApp: false,
+        };
+        firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings);
+        console.log("email sent");
+      } catch (err) {
+        console.log("email not sent", err);
+      }
 
       console.log("success");
-    } catch (err) {
-      console.log(err);
-    }
-
-    try {
-      const actionCodeSettings = {
-        url: "react-mission-caab8.web.app",
-        handleCodeInApp: false,
-      };
-      firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings);
-      console.log("email sent");
       dispatch(replace("/"));
     } catch (err) {
       console.log(err);
