@@ -9,6 +9,7 @@ import Community from "./components/Pages/Community/Community";
 import Intro from "./components/Pages/Intro/Intro";
 import Notice from "./components/Pages/Notice/Notice";
 import SignUp from "./components/SignUp/SignUp";
+import VerifyEmail from "./components/Pages/VerifyEmail/VerifyEmail";
 
 const App = () => {
   console.log("APP_RENDER");
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <>
       <div>
-        <Layout userData={userData}>
+        {/* <Layout userData={userData}>
           <Switch>
             <Route exact path="/" render={() => <Welcome />} />
             <Route path="/intro" component={Intro} />
@@ -39,7 +40,8 @@ const App = () => {
               render={() => <SignUp userData={userData} />}
             />
           </Switch>
-        </Layout>
+        </Layout> */}
+        <VerifyEmail />
       </div>
     </>
   );

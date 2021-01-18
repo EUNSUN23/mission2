@@ -7,9 +7,13 @@ import SelfIntroduction from "./SignUpInfo/SelfIntroduction/SelfIntroduction";
 import Button from "./Button/Button";
 import Modal from "./Modal/Modal";
 import { checkRequires, isformValid } from "../../utils/signUp";
+import { replace } from "react-router-redux";
+import { useDispatch } from "react-redux";
 import styles from "./SignUp.module.css";
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+
   const onCanceledHandler = (e) => {
     e.preventDefault();
     console.log("CANCEL SUBMIT");
@@ -17,7 +21,9 @@ const SignUpForm = () => {
 
   const onSubmittedHandler = (e) => {
     e.preventDefault();
-    console.log("SUBMIT SIGNUP");
+    //firebase 이메일인증코드
+
+    dispatch(replace("/verifyEmail"));
   };
 
   return (
