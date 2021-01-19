@@ -36,6 +36,7 @@ const App = () => {
       <div>
         <Switch>
           <Layout isAuth={isAuth}>
+            <Route path="/verifyEmail" component={VerifyEmail} />
             <Route exact path="/" render={() => <Welcome />} />
             <Route path="/intro" component={Intro} />
             <Route path="/overview" render={() => <OverView />} />
@@ -45,7 +46,6 @@ const App = () => {
             />
             <Route path="/notice" component={Notice} />
             <Route path="/signup" render={() => <SignUp isAuth={isAuth} />} />
-            <Route path="/verifyEmail" component={VerifyEmail} />
           </Layout>
         </Switch>
       </div>

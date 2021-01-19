@@ -41,8 +41,7 @@ const VerifyEmail = () => {
               )}
               href="#"
             >
-              <i className="fa fa-envelope-o" aria-hidden="true"></i> 인증메일
-              다시 보내기
+              인증메일 다시 보내기
             </a>
           </p>
         </main>
