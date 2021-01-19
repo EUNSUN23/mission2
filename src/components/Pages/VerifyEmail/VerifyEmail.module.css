@@ -44,7 +44,7 @@
 
 .Wrapper .NavLink:hover,
 .Wrapper .NavLink:focus {
-  color: #222;
+  color: #333;
   border-bottom: 0.25rem solid #fff;
 }
 

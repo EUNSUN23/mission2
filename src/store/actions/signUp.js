@@ -12,6 +12,8 @@ export const setIdPw = (name, inputValue) => {
         type: actionTypes.SET_PW,
         password: inputValue,
       };
+    default:
+      break;
   }
 };
 

@@ -14,35 +14,35 @@ import VerifyEmail from "./components/Pages/VerifyEmail/VerifyEmail";
 const App = () => {
   console.log("APP_RENDER");
   const dispatch = useDispatch();
-  const userData = useSelector((state) => {
-    return state.auth;
+  const emailVerifying = useSelector((state) => {
+    return state.auth.isVerifying;
+  });
+  const isAuth = useSelector((state) => {
+    return state.auth.isAuth;
   });
 
   useEffect(() => {
     dispatch(replace("/"));
-  }, []);
+  }, [dispatch]);
+
+  const routes = emailVerifying ? (
+    <Route path="/verifyEmail" component={VerifyEmail} />
+  ) : (
+    <Layout isAuth={isAuth}>
+      <Switch>
+        <Route exact path="/" render={() => <Welcome />} />
+        <Route path="/intro" component={Intro} />
+        <Route path="/overview" render={() => <OverView />} />
+        <Route path="/community" render={() => <Community isAuth={isAuth} />} />
+        <Route path="/notice" component={Notice} />
+        <Route path="/signUp" render={() => <SignUp isAuth={isAuth} />} />
+      </Switch>
+    </Layout>
+  );
 
   return (
     <>
-      <div>
-        <Layout userData={userData}>
-          <Switch>
-            <Route exact path="/" render={() => <Welcome />} />
-            <Route path="/intro" component={Intro} />
-            <Route path="/overview" render={() => <OverView />} />
-            <Route
-              path="/community"
-              render={() => <Community userData={userData} />}
-            />
-            <Route path="/notice" component={Notice} />
-            <Route
-              path="/signUp"
-              render={() => <SignUp userData={userData} />}
-            />
-          </Switch>
-        </Layout>
-        <VerifyEmail />
-      </div>
+      <div>{routes}</div>
     </>
   );
 };

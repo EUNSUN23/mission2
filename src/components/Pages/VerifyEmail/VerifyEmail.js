@@ -41,7 +41,7 @@ const VerifyEmail = () => {
                 "btn btn-lg btn-secondary fw-bold border-white bg-white",
                 styles.NavLink
               )}
-              href="#"
+              href="/"
             >
               <i className="fa fa-envelope-o" aria-hidden="true"></i> 인증메일
               다시 보내기

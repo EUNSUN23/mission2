@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { memo } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./Gender.module.css";
 import { setGender } from "../../../../store/actions/signUp";
 

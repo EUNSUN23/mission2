@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useCallback, memo } from "react";
-import { history } from "../../../index";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import styles from "./Tab.module.css";
 
 const Tab = (props) => {
@@ -14,7 +12,7 @@ const Tab = (props) => {
     } else {
       setOpen(false);
     }
-  }, [currentPath]);
+  }, [isClicked, url, currentPath]);
 
   return (
     <li

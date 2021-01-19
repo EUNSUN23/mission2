@@ -1,11 +1,11 @@
 import React from "react";
 import Board from "../../PageContents/Community/Board/Board";
 
-const Community = ({ userData }) => {
+const Community = ({ isAuth }) => {
   return (
     <div>
       <h2>Community</h2>
-      <Board userData={userData} />
+      <Board isAuth={isAuth} />
     </div>
   );
 };

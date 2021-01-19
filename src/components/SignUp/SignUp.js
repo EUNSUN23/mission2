@@ -1,15 +1,12 @@
-import React, { Component } from "react";
 import TextInput from "./Input/TextInput/TextInput";
 import Gender from "./SignUpInfo/Gender/Gender";
 import BirthInfo from "./SignUpInfo/BirthInfo/BirthInfo";
 import Interest from "./SignUpInfo/Interest/Interest";
 import SelfIntroduction from "./SignUpInfo/SelfIntroduction/SelfIntroduction";
-import Button from "./Button/Button";
-import Modal from "./Modal/Modal";
-import { checkRequires, isformValid } from "../../utils/signUp";
 import { replace } from "react-router-redux";
 import { useDispatch } from "react-redux";
 import styles from "./SignUp.module.css";
+import { emailVerifying } from "../../store/actions/auth";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +19,7 @@ const SignUpForm = () => {
   const onSubmittedHandler = (e) => {
     e.preventDefault();
     //firebase 이메일인증코드
-
+    dispatch(emailVerifying());
     dispatch(replace("/verifyEmail"));
   };
 

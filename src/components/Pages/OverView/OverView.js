@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "react-router-redux";
@@ -34,7 +34,7 @@ const OverView = () => {
       setBaseURL(path);
       dispatch(push(`${currentPath}${path || ""}`));
     },
-    [dispatch]
+    [isMainClicked, currentPath, dispatch]
   );
 
   let mainRoute = null;
@@ -42,7 +42,7 @@ const OverView = () => {
   const backEventHandler = useCallback(() => {
     setIsBackClicked(true);
     setOnPopState(!onPopstate);
-  }, []);
+  }, [onPopstate]);
 
   window.onpopstate = function (event) {
     backEventHandler();

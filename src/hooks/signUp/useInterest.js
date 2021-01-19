@@ -35,9 +35,11 @@ const useInterest = (initValue) => {
           console.log(checked);
           disabled && !checked ? setMovie(false) : setMovie(checked);
           break;
+        default:
+          break;
       }
     },
-    [romance, trip, movie]
+    [disabled]
   );
 
   return [{ romance: romance, trip: trip, movie: movie }, onInterestHandler];

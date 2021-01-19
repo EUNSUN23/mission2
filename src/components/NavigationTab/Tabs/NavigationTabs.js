@@ -1,5 +1,5 @@
 import React, { useState, useEffect, memo, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import pageData from "../../../data/contentData.json";
 import Tab from "./Tab";
 import styles from "./NavigationTabs.module.css";
@@ -15,29 +15,22 @@ const NavigationTabs = memo((props) => {
   const currentPath = useSelector((state) => {
     return state.router.location.pathname;
   });
-  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("PUSH PATH");
     routeTrigger(path);
   }, [path, routeTrigger, isMainClicked, isClicked]);
 
-  const onMainTabHandler = useCallback(
-    (page, path) => {
-      setMainPage(page);
-      setPath(path);
-      setIsClicked(true);
-    },
-    [mainPage, path]
-  );
+  const onMainTabHandler = useCallback((page, path) => {
+    setMainPage(page);
+    setPath(path);
+    setIsClicked(true);
+  }, []);
 
-  const onSubTabHandler = useCallback(
-    (path) => {
-      setPath(path);
-      setIsClicked(true);
-    },
-    [path]
-  );
+  const onSubTabHandler = useCallback((path) => {
+    setPath(path);
+    setIsClicked(true);
+  }, []);
 
   console.log(mainTabKey);
 

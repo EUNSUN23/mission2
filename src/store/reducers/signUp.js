@@ -15,15 +15,6 @@ const signUp = {
   modalMessage: [],
 };
 
-const updateObj = (oldObj, updatedObj) => {
-  const updatedState = { ...oldObj, ...updatedObj };
-  return updatedState;
-};
-
-const updateState = (initState, updatedState) => {
-  return { ...initState, updatedState };
-};
-
 const setIdPw = (state, name, idPw) => {
   const initIdPwState = { ...state };
   initIdPwState.form.IdPw[name] = idPw;

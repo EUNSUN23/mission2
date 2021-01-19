@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from "react";
 import { addBoard } from "../../store/actions/board";
 import { useDispatch, useSelector } from "react-redux";
 

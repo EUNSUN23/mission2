@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { birthOptionChange, checkLeapYear } from "../../utils/signUp";
 import { setBirth } from "../../store/actions/signUp";
 
-const UseBirth = () => {
+const useBirth = () => {
   const [year, setYear] = useState();
   const [month, setMonth] = useState();
   const [date, setDate] = useState();
@@ -13,7 +13,7 @@ const UseBirth = () => {
 
   useEffect(() => {
     setDateRange(birthOptionChange(isLeapYear, month));
-  }, [year, month]);
+  }, [year, month, isLeapYear]);
 
   if (year && month && date) {
     dispatch(setBirth(year, month, date));
@@ -36,9 +36,11 @@ const UseBirth = () => {
           year && setIsLeapYear(checkLeapYear(year));
           setDate(value);
           break;
+        default:
+          break;
       }
     },
-    [year, month, date, dateRange]
+    [year, month]
   );
   return [
     { year: year, month: month, date: date, dateRange: dateRange },
@@ -46,4 +48,4 @@ const UseBirth = () => {
   ];
 };
 
-export default UseBirth;
+export default useBirth;

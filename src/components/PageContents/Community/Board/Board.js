@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BoardItem from "./BoardItem";
 import { useSelector, useDispatch } from "react-redux";
-import { addBoard, deleteBoard } from "../../../../store/actions/board";
+import { deleteBoard } from "../../../../store/actions/board";
 import styles from "./Board.module.css";
 import useInput from "../../../../hooks/community/useInput";
 import useAddData from "../../../../hooks/community/useAddData";

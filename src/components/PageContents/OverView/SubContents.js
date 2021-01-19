@@ -1,7 +1,7 @@
 import React from "react";
 
 const SubContents = (props) => {
-  const { contents, currentPath } = props;
+  const { contents } = props;
 
   return (
     <>
