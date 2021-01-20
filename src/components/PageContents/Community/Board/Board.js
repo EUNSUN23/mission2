@@ -87,7 +87,13 @@ const Board = memo(({ isAuth }) => {
           <>
             <label htmlFor="text">내용 :</label>
             <textarea id="text" value={text} onChange={setText}></textarea>
-            <button type="submit" onClick={(e) => setPost(e, text)}>
+            <button
+              type="submit"
+              onClick={(e) => {
+                setPost(e, text);
+                setText(null);
+              }}
+            >
               추가
             </button>
           </>
