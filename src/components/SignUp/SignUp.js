@@ -4,14 +4,12 @@ import Gender from "./SignUpInfo/Gender/Gender";
 import BirthInfo from "./SignUpInfo/BirthInfo/BirthInfo";
 import Interest from "./SignUpInfo/Interest/Interest";
 import SelfIntroduction from "./SignUpInfo/SelfIntroduction/SelfIntroduction";
-import Button from "./Button/Button";
-import Modal from "./Modal/Modal";
-import { checkRequires, isformValid } from "../../utils/signUp";
 import styles from "./SignUp.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { firebaseAuth } from "../../firebase";
 import { firestore } from "../../firebase";
 import { replace } from "react-router-redux";
+import { emailVerifying } from "../../store/actions/auth";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -44,21 +42,23 @@ const SignUpForm = () => {
           },
           (err) => console.log(err)
         );
-      try {
-        const actionCodeSettings = {
-          url: "https://react-mission-caab8.web.app",
-          handleCodeInApp: false,
-        };
-        firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings);
-        console.log("email sent");
-      } catch (err) {
-        console.log("email not sent", err);
-      }
 
       console.log("success");
-      dispatch(replace("/verifyEmail"));
     } catch (err) {
       console.log(err);
+    }
+
+    try {
+      const actionCodeSettings = {
+        url: "https://react-mission-caab8.web.app",
+        handleCodeInApp: false,
+      };
+      firebaseAuth.currentUser.sendEmailVerification(actionCodeSettings);
+      console.log("email sent");
+      dispatch(emailVerifying());
+      dispatch(replace("/verifyEmail"));
+    } catch (err) {
+      console.log("email not sent", err);
     }
   };
 

@@ -4,6 +4,7 @@ import { firebaseAuth } from "../../firebase";
 const auth = {
   isAuth: false,
   userData: null,
+  isVerifying: false,
 };
 
 const authCheck = (state) => {
@@ -34,6 +35,9 @@ const reducer = (state = auth, action) => {
       return state;
     case actionTypes.AUTH_CHECK:
       authCheck(state);
+      return state;
+    case actionTypes.AUTH_EMAIL_VERIFYING:
+      state.isVerifying = true;
       return state;
     default:
       return state;

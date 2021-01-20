@@ -36,6 +36,12 @@ export const logout = () => {
   };
 };
 
+export const emailVerifying = () => {
+  return {
+    type: actionTypes.AUTH_EMAIL_VERIFYING,
+  };
+};
+
 export const checkAuthTimeout = (expirationTime) => {
   //1시간 지나서 토큰이 expire되면 로그아웃되었다는 ui창 띄우기
   return debounce((dispatch) => {

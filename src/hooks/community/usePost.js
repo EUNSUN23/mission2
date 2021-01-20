@@ -1,28 +1,31 @@
-import { useEffect, useState, useRef } from "react";
-import { addBoard } from "../../store/actions/board";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { firestore, firebaseAuth } from "../../firebase";
 
 const usePost = () => {
-  const number = useSelector((state) => {
-    return state.board.data.length;
-  });
-  const dispatch = useDispatch();
+  const [post, setPost] = useState(false);
 
-  const validation = (e, value, author) => {
+  const validation = async (e, value) => {
     e.preventDefault();
-    if (value && author) {
-      dispatch(
-        addBoard({
-          no: number + 1,
+
+    if (value) {
+      const user = firebaseAuth.currentUser;
+      const boardDocument = await boardCollection.document();
+      const documentID = userDocument.documentID;
+      boardDocument.setData(
+        {
           date: Date().toString(),
           title: value,
-          author: author,
-        })
+          author: user.email,
+          identifier: documentID,
+        },
+        (err) => console.log(err)
       );
+
+      setPost(!post);
     }
   };
 
-  return validation;
+  return [post, validation];
 };
 
 export default usePost;

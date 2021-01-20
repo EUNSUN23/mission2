@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./VerifyEmail.module.css";
 import cx from "classnames";
 import globalStyles from "../../../Assets/bootstrap.min.css";
+
 const VerifyEmail = () => {
   return (
     <div className={styles.Wrapper}>
