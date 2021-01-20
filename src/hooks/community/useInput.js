@@ -6,8 +6,7 @@ const useInput = (initText) => {
   console.log(text);
 
   const onInputChange = (e) => {
-    e.preventDefault();
-    setText(e.target.value);
+    e !== null ? setText(e.target.value) : setText("");
   };
 
   return [text, onInputChange];

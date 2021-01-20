@@ -1,7 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import BoardItem from "./BoardItem";
-import { useSelector, useDispatch } from "react-redux";
-import { addBoard, deleteBoard } from "../../../../store/actions/board";
+import { useDispatch } from "react-redux";
 import { firestore } from "../../../../firebase";
 import { replace } from "react-router-redux";
 import styles from "./Board.module.css";
@@ -10,7 +9,6 @@ import usePost from "../../../../hooks/community/usePost";
 
 const Board = memo(({ isAuth }) => {
   const [text, setText] = useInput("");
-  const [author, setAuthor] = useState("");
   const [openEdit, setOpenEdit] = useState(null);
   const [post, setPost] = usePost();
   const [boardData, setBoardData] = useState([]);
@@ -34,6 +32,7 @@ const Board = memo(({ isAuth }) => {
       !isAuth ? dispatch(replace("/signup")) : getBoardData();
     } else {
       getBoardData();
+      setText(null);
     }
   }, [openEdit, post]);
 
@@ -64,7 +63,7 @@ const Board = memo(({ isAuth }) => {
             title={obj.title}
             date={obj.date}
             author={obj.author}
-            onDeleteBtn={onDeleteHandler(obj.identifier)}
+            onDeleteBtn={() => onDeleteHandler(obj.identifier)}
           />
         );
       })

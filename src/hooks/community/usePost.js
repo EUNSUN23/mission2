@@ -9,19 +9,23 @@ const usePost = () => {
 
     if (value) {
       const user = firebaseAuth.currentUser;
-      const boardDocument = await boardCollection.document();
-      const documentID = userDocument.documentID;
-      boardDocument.setData(
-        {
+      const boardDocument = firestore.collection("board").doc();
+      console.log(boardDocument);
+      const documentID = boardDocument.id;
+      console.log(documentID);
+      try {
+        firestore.collection("board").doc(documentID).set({
           date: Date().toString(),
           title: value,
           author: user.email,
           identifier: documentID,
-        },
-        (err) => console.log(err)
-      );
-
-      setPost(!post);
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        console.log(boardDocument);
+        setPost(!post);
+      }
     }
   };
 

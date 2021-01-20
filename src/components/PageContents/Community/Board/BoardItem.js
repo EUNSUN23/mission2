@@ -12,7 +12,7 @@ const BoardItem = ({ number, date, author, title, onDeleteBtn }) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            onDeleteBtn(number);
+            onDeleteBtn();
           }}
         >
           삭제
